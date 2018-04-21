@@ -14,12 +14,7 @@ extents = Vector2( 16.5328, 15.9143 )
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "attack",
+"name": "idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -29,7 +24,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "idle",
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
 "speed": 5.0
 } ]
 
@@ -38,7 +38,7 @@ animations = [ {
 custom_solver_bias = 0.0
 extents = Vector2( 16, 32 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 position = Vector2( 200.023, 124.608 )
 input_pickable = false
