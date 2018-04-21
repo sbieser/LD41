@@ -1,44 +1,50 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://textures/player_anims/player_idle.jpg" type="Texture" id=2]
-[ext_resource path="res://textures/player_anims/player_crouch_walk_2.jpg" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=2]
+[ext_resource path="res://textures/player_anims/player_idle2.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/player_idle3.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/player_idle4.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/player_idle5.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/player_idle6.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/player_idle.jpg" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/player_crouch_walk_2.jpg" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 16.5328, 15.9143 )
+extents = Vector2( 10, 28 )
 
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "walk",
+"name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "attack",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "duck",
+"name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
-"name": "idle",
+"name": "duck",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 16, 32 )
+extents = Vector2( 10, 28 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 position = Vector2( 200.023, 124.608 )
 input_pickable = false
@@ -47,6 +53,9 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+__meta__ = {
+"_edit_group_": true
+}
 jump_speed = -300
 gravity = 500
 run_speed = 165
@@ -56,6 +65,7 @@ facing = 1
 [node name="AttackArea" type="Area2D" parent="." index="0"]
 
 editor/display_folded = true
+position = Vector2( -7, 3 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -67,7 +77,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
 
-position = Vector2( -32, -16 )
+position = Vector2( 13, 1 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -86,6 +96,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
+position = Vector2( -15, 4 )
 shape = SubResource( 3 )
 _sections_unfolded = [ "Transform" ]
 

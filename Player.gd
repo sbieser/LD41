@@ -53,10 +53,10 @@ func change_state(new_state):
 				new_anim = "attack"
 				$AttackArea.visible = true
 				get_node("AttackArea/AttackTimer").start()
-			#CROUCH_ATTACK:
-			#	new_anim = "crouch_attack"
-			#	$AttackArea.visible = true
-			#	get_node("AttackArea/AttackTimer").start()
+			CROUCH_ATTACK:
+				#new_anim = "crouch_attack"
+				$AttackArea.visible = true
+				get_node("AttackArea/AttackTimer").start()
 			JUMP:
 				#new_anim = "jump"
 				new_anim = "idle"
@@ -78,14 +78,18 @@ func change_state(new_state):
 		$AnimatedSprite.flip_h = true
 		if state == CROUCH_WALK or state == CROUCH_IDLE or state == CROUCH_ATTACK:
 			get_node("AttackArea/CollisionShape2D").position = Vector2(-33,16)
+			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,16))
 		else:
-			get_node("AttackArea/CollisionShape2D").position = Vector2(-33,-16)
+			get_node("AttackArea/CollisionShape2D").position = Vector2(-33,0)
+			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,32))
 	else:
 		$AnimatedSprite.flip_h = false
 		if state == CROUCH_WALK or state == CROUCH_IDLE or state == CROUCH_ATTACK:
 			get_node("AttackArea/CollisionShape2D").position = Vector2(33,16)
+			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,16))
 		else:
-			get_node("AttackArea/CollisionShape2D").position = Vector2(33,-16)
+			get_node("AttackArea/CollisionShape2D").position = Vector2(33,0)
+			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,32))
 	
 func handle_horizontal_movement():
 	var right = Input.is_action_pressed("ui_right") #movement right
@@ -157,8 +161,8 @@ func handle_input():
 		CROUCH_IDLE:
 			if velocity.x != 0:
 				change_state(CROUCH_WALK)
-			#elif x:
-			#	change_state(CROUCH_ATTACK)
+			elif x:
+				change_state(CROUCH_ATTACK)
 			elif z and is_on_floor():
 				velocity.y = jump_speed
 				change_state(JUMP)
@@ -190,7 +194,8 @@ func handle_input():
 			elif velocity.x == 0:
 				change_state(IDLE)
 		JUMP:
-			pass
+			if x:
+				change_state(ATTACK)
 		ATTACK:
 			pass
 	
@@ -245,7 +250,11 @@ func _on_AttackTimer_timeout():
 	#hit_bodies.clear()
 	get_node("AttackArea/AttackTimer").stop()
 	$AttackArea.visible = false
-	change_state(IDLE)
+	#change_state(IDLE)
+	if is_on_floor():
+		change_state(IDLE)
+	else:
+		change_state(JUMP)
 
 
 #func _on_StunTimer_timeout():
