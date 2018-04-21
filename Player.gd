@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 #if anything outside of this class needs to know if the player was hit, it could connect to this
 signal hit
+signal button_pressed
 
 #export (int) var walk_speed
 
@@ -12,15 +13,16 @@ export (int) var walk_speed = 85
 export (int) var facing = 0
 
 #TODO: We need to have states to show which direction the player is facing, left or right
-enum {IDLE, JUMP, ATTACK, WALK, CROUCH_IDLE, CROUCH_WALK, CROUCH_ATTACK}
+enum {IDLE, JUMP, ATTACK, WALK, CROUCH_IDLE, CROUCH_WALK, CROUCH_ATTACK, STUNNED, STUNNED_IDLE}
 enum {RIGHT_FACING, LEFT_FACING}
 var velocity = Vector2()
 var state
-#var facing
 var anim
 var new_anim
 
-var hit_bodies = [] #array of bodies bit by the current attack
+var hit_bodies = [] #array of bodies hit by the current attack
+var hit_enemies = [] #array of enemies hit by the current attack
+var hit_buttons = [] #array of buttons hit by the current attack
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -127,7 +129,7 @@ func print_state():
 			print("CROUCH_ATTAK")
 
 func handle_input():
-	print_state()
+	#print_state()
 	
 	if state == ATTACK or state == CROUCH_ATTACK:
 		return
@@ -216,7 +218,38 @@ func _physics_process(delta):
 					change_state(WALK)
 				else:
 					change_state(IDLE)
-	
+					
+	#check attacking
+	if state == ATTACK:
+		var areas = $AttackArea.get_overlapping_areas()
+		for area in areas:
+			if area.is_in_group("enemy") and not hit_enemies.has(area):
+				hit_enemies.append(area)
+				#enemy take damage?
+				print("hit food")
+			elif area.is_in_group("button") and not hit_buttons.has(area):
+				hit_buttons.append(area)
+				emit_signal("button_pressed")
+				print("hit button")
+				
+				
+	#check if stunned			
+	#var collision_count = get_slide_count()
+	#if collision_count > 0:
+	#	for i in range(collision_count):
+	#		var collision = get_slide_collision(i)
+#			if collision.collider.is_in_group("enemy"):
+#				change_state(STUNNED)
+#				print("we have been hit by: " + collision.collider.name)
+#				velocity.y = jump_speed
+#				velocity.x = -velocity.x
+#
+#	if state == STUNNED:
+#		if is_on_floor():
+#			change_state(STUNNED_IDLE)
+#			$StunIdleTimer.start()
+				
+				
 	#if attacking:
 	#	var bodies = $AttackArea.get_overlapping_bodies()
 	#	for body in bodies:
@@ -247,10 +280,13 @@ func _physics_process(delta):
 	#			
 	
 func _on_AttackTimer_timeout():
-	#hit_bodies.clear()
+	#we do this so the same attack doesn't hit a million times on the same body/area
+	hit_bodies.clear()
+	hit_enemies.clear()
+	hit_buttons.clear()
+	
 	get_node("AttackArea/AttackTimer").stop()
 	$AttackArea.visible = false
-	#change_state(IDLE)
 	if is_on_floor():
 		change_state(IDLE)
 	else:
@@ -261,50 +297,3 @@ func _on_AttackTimer_timeout():
 #	#pass # replace with function body
 #	$StunIdleTimer.stop()
 #	change_state(IDLE)
-		
-#func get_input():
-#	if attacking || state == STUNNED || state == STUNNED_IDLE:
-#		return
-#
-#	velocity.x = 0
-#	var right = Input.is_action_pressed("ui_right")
-#	var left = Input.is_action_pressed("ui_left")
-#	var jump = Input.is_action_just_pressed("ui_select")
-#	var attack = Input.is_action_just_pressed("ui_attack")
-#	var down = Input.is_action_pressed("ui_down")
-#	var run = Input.is_action_pressed("ui_run")
-#	var block = Input.is_action_pressed("ui_block")
-#
-#	if not attacking and attack:
-#		change_state(ATTACK)
-#		return
-#
-#	if attack:
-#		change_state(ATTACK)
-#		return
-#	if jump and is_on_floor():
-#		change_state(JUMP)
-#		velocity.y = jump_speed
-#
-#	var speed = walk_speed
-#	if run:
-#		speed = run_speed
-#
-#	if right:
-#		velocity.x += speed
-#	if left:
-#		velocity.x -= speed
-#
-#	if down:
-#		if velocity.x != 0:
-#			change_state(CROUCH_WALK)
-#		else:
-#			change_state(CROUCH)
-#	elif velocity.x != 0:
-#		if run and is_on_floor():
-#			if state != RUN and state != ROLL:
-#				change_state(ROLL)
-#		else:
-#			change_state(WALK)
-#	elif state == WALK or state == CROUCH or state == CROUCH_WALK or state == RUN:
-#		change_state(IDLE)

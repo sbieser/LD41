@@ -7,11 +7,12 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="Button" type="Node"]
+[node name="Button" type="Node2D" groups=[
+"button",
+]]
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
-position = Vector2( 60.2735, 52.9429 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -19,11 +20,10 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Sprite" type="Sprite" parent="Area2D" index="0"]
+[node name="Sprite" type="Sprite" parent="Area2D" index="0" groups=[
+"button",
+]]
 
 texture = ExtResource( 1 )
 
