@@ -28,10 +28,11 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_group_": true
 }
-SPEED = null
+SPEED = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
@@ -40,8 +41,10 @@ animation = "move1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 0.0463268, 15.9606 )
-scale = Vector2( 3.18059, 0.789183 )
+position = Vector2( 0.0463268, 15.9027 )
+scale = Vector2( 3.18059, 0.80179 )
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_Enemy_Grub_body_entered"]
 
 

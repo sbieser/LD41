@@ -68,7 +68,7 @@ func change_state(new_state):
 	if state == CROUCH_IDLE or state == CROUCH_WALK or state == CROUCH_ATTACK:
 		$CollisionShape2D.shape.set_extents(Vector2(16,16))
 		$CollisionShape2D.position = Vector2(0,16)
-		$AnimatedSprite.position = Vector2(0,16)
+		#$AnimatedSprite.position = Vector2(0,16)
 	else:
 		$CollisionShape2D.shape.set_extents(Vector2(16,32))
 		$CollisionShape2D.position = Vector2(0,0)
