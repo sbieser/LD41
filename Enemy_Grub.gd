@@ -23,6 +23,12 @@ func _process(delta):
 
 func remove_enemy():
 	queue_free()
+	
+func hit_detected():
+	hitpoint = hitpoint -1
+	
+	if hitpoint < 1:
+		remove_enemy()
 
 func _on_Enemy_Grub_body_entered(body):
 	emit_signal("hit")
@@ -34,8 +40,6 @@ func _on_Enemy_Grub_body_entered(body):
 			direction = "left"
 		
 		move()
-	else:
-		remove_enemy()
 
 func move():
 	if direction == "right":

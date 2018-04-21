@@ -18,7 +18,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="Enemy_Grub" type="Area2D"]
+[node name="Enemy_Grub" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
