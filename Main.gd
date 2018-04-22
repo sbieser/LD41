@@ -9,17 +9,16 @@ var all_grubs = []
 var all_flys = []
 var spawn_list
 
-signal restart
-signal main_menu
 signal game_over
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
-	self.connect( "game_over", self, "handle_game_over")
-	$HUD.connect( "restart", self, "handle_restart_game" )
-	$HUD.connect( "main_menu", self, "handle_main_menu" )
+	self.connect( "game_over", self, "_handle_game_over")
+	$HUD.connect( "restart", self, "_handle_restart_game" )
+	$HUD.connect( "main_menu", self, "_handle_main_menu" )
+	$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
 
 func _on_Timer_timeout():
@@ -70,17 +69,17 @@ func _on_SpawnTimer_timeout():
 		add_child(fly_instance)
 		all_flys.push_back(fly_instance)
 
-func handle_restart_game():
+func _handle_restart_game():
 	print("handling retry")
 	#$HUD.emit_signal("restart")
 	pass
 	
-func handle_main_menu():
+func _handle_main_menu():
 	print("handling main menu")
 	#$HUD.emit_signal("main_menu")
 	pass
 	
-func handle_game_over():
+func _handle_game_over():
 	$HUD.emit_signal("game_over")
 
 		
@@ -96,4 +95,6 @@ func _on_enemy_dies(enemy):
 
 func _on_Tama_change_animation(animation):
 	$TamaAnimatedSprite.play(animation)
-
+	
+func _handle_end_minigame():
+	pass

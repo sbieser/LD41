@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sounds/Hit_Hurt18.wav" type="AudioStream" id=15]
 [ext_resource path="res://Tama.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Minigame.tscn" type="PackedScene" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -31,7 +32,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 food_count = 0
@@ -61,7 +62,7 @@ position = Vector2( 316.027, -43.9832 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "egg"
-frame = 3
+frame = 2
 playing = true
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -169,6 +170,11 @@ mix_target = 0
 bus = "Master"
 
 [node name="Tama" parent="." index="13" instance=ExtResource( 16 )]
+
+[node name="Minigame" parent="." index="14" instance=ExtResource( 17 )]
+
+position = Vector2( 321, -1.5 )
+scale = Vector2( 9.03125, 13.9844 )
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
