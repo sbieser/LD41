@@ -11,9 +11,9 @@ export (int) var tama_hungriness = 0 		# max 30?
 export (int) var tama_rating = 0 			# max 30?
 export (int) var death_threshold = -5		# if tama_happiness and tama_hungriness reach this level, should
 											#	equate death
-											
-
-
+										
+										
+										
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here

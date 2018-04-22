@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/ChevyRay - Softsquare.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://textures/meters/empty.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
-size = 32
+size = 16
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
@@ -13,36 +14,13 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
-size = 32
+size = 16
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=3]
-
-size = 48
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=4]
-
-size = 32
-use_mipmaps = false
-use_filter = true
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=5]
-
-size = 32
-use_mipmaps = false
-use_filter = true
-font_data = ExtResource( 2 )
-
-[node name="HUD" type="CanvasLayer" index="0"]
+[node name="HUD" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -58,8 +36,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 37.0
+margin_top = -1.0
 margin_right = 178.0
-margin_bottom = 65.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -79,8 +58,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 121.0
-margin_right = 161.0
+margin_left = 79.0
+margin_right = 119.0
 margin_bottom = 33.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -95,76 +74,85 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="GameOverLabel" type="Label" parent="." index="2"]
+[node name="HungerLabel" type="Label" parent="." index="2"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 195.0
-margin_top = 140.0
-margin_right = 123.0
-margin_bottom = 64.0
+margin_left = 490.0
+margin_top = 20.0
+margin_right = 631.0
+margin_bottom = 85.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
-text = "Game Over"
+custom_fonts/font = SubResource( 1 )
+text = "Hunger"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "custom_fonts" ]
 
-[node name="RetryLabel" type="Label" parent="." index="3"]
+[node name="Hunger1" type="Sprite" parent="HungerLabel" index="0"]
 
-visible = false
+position = Vector2( 108, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Hunger2" type="Sprite" parent="HungerLabel" index="1"]
+
+position = Vector2( 68, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Hunger3" type="Sprite" parent="HungerLabel" index="2"]
+
+position = Vector2( 88, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HappyLabel" type="Label" parent="." index="3"]
+
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 160.0
-margin_top = 260.0
-margin_right = 269.0
-margin_bottom = 293.0
+margin_left = 500.0
+margin_right = 641.0
+margin_bottom = 65.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
-text = "Retry?"
+custom_fonts/font = SubResource( 1 )
+text = "Happy"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "custom_fonts" ]
 
-[node name="QuitLabel" type="Label" parent="." index="4"]
+[node name="Happy1" type="Sprite" parent="HappyLabel" index="0"]
 
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 380.0
-margin_top = 260.0
-margin_right = 40.0
-margin_bottom = 14.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = SubResource( 5 )
-text = "Quit?"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
+position = Vector2( 98, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Happy2" type="Sprite" parent="HappyLabel" index="1"]
+
+position = Vector2( 58, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Happy3" type="Sprite" parent="HappyLabel" index="2"]
+
+position = Vector2( 78, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
 
 
