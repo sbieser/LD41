@@ -2,7 +2,10 @@ extends Node
 
 onready var grub_scene = preload("res://Enemy_Grub.tscn")
 
-var food_count = 0
+export (int) var tama_happiness = 0 		# should be out of 100
+export (int) var tama_hungriness = 0 		# should be out of 100
+export (int) var tama_health = 100 			# should be out of 100
+export (int) var food_count = 0				# The currency in which to feed the tama
 
 var all_grubs = []
 

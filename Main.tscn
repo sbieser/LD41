@@ -9,6 +9,10 @@
 [node name="Main" type="Node"]
 
 script = ExtResource( 1 )
+tama_happiness = 0
+tama_hungriness = 0
+tama_health = 100
+food_count = 0
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 
