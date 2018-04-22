@@ -35,6 +35,7 @@ animations = [ {
 
 script = ExtResource( 1 )
 food_count = 0
+coin_count = 0
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 
@@ -169,6 +170,28 @@ mix_target = 0
 bus = "Master"
 
 [node name="Tama" parent="." index="13" instance=ExtResource( 16 )]
+
+[node name="CoinPointContainer" type="Container" parent="." index="14"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 35.0
+margin_top = -445.0
+margin_right = 605.0
+margin_bottom = 445.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Grow Direction", "Margin", "Rect" ]
+
+[node name="coin_spawn1" type="Position2D" parent="CoinPointContainer" index="0"]
+
+[node name="coin_spawn2" type="Position2D" parent="CoinPointContainer" index="1"]
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
