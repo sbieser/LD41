@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/ChevyRay - Softsquare.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://textures/meters/empty.png" type="Texture" id=3]
+[ext_resource path="res://textures/meters/full.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -97,23 +98,41 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Hunger1" type="Sprite" parent="HungerLabel" index="0"]
-
-position = Vector2( 108, 8 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Hunger2" type="Sprite" parent="HungerLabel" index="1"]
+[node name="HungerEmpty1" type="Sprite" parent="HungerLabel" index="0"]
 
 position = Vector2( 68, 8 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Hunger3" type="Sprite" parent="HungerLabel" index="2"]
+[node name="HungerFull1" type="Sprite" parent="HungerLabel" index="1"]
+
+position = Vector2( 68, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HungerEmpty2" type="Sprite" parent="HungerLabel" index="2"]
 
 position = Vector2( 88, 8 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
+
+[node name="HungerFull2" type="Sprite" parent="HungerLabel" index="3"]
+
+position = Vector2( 88, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HungerEmpty3" type="Sprite" parent="HungerLabel" index="4"]
+
+position = Vector2( 108, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HungerFull3" type="Sprite" parent="HungerLabel" index="5"]
+
+position = Vector2( 108, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 
 [node name="HappyLabel" type="Label" parent="." index="3"]
 
@@ -137,22 +156,40 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Happy1" type="Sprite" parent="HappyLabel" index="0"]
-
-position = Vector2( 98, 8 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Happy2" type="Sprite" parent="HappyLabel" index="1"]
+[node name="HappyEmpty1" type="Sprite" parent="HappyLabel" index="0"]
 
 position = Vector2( 58, 8 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Happy3" type="Sprite" parent="HappyLabel" index="2"]
+[node name="HappyFull1" type="Sprite" parent="HappyLabel" index="1"]
+
+position = Vector2( 58, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HappyEmpty2" type="Sprite" parent="HappyLabel" index="2"]
 
 position = Vector2( 78, 8 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
+
+[node name="HappyFull2" type="Sprite" parent="HappyLabel" index="3"]
+
+position = Vector2( 78, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HappyEmpty3" type="Sprite" parent="HappyLabel" index="4"]
+
+position = Vector2( 98, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HappyFull3" type="Sprite" parent="HappyLabel" index="5"]
+
+position = Vector2( 98, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 
 

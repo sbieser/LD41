@@ -43,6 +43,7 @@ func _on_Player_button_pressed(button_type):
 			if (food_count > 0):
 				food_count = food_count - 1
 				$HUD.update_score(food_count)
+				$Tama.food(1)
 			#food_count = food_count - 1
 			#$HUD.update_score(food_count)
 		1:
@@ -51,12 +52,6 @@ func _on_Player_button_pressed(button_type):
 		2:
 			#print("this is the discipline button")
 			pass
-			
-func _on_Player_hit():
-	pass
-	#this is for testing purposes
-	#food_count = food_count + 1
-	#$HUD.update_score(food_count)
 	
 func _on_SpawnTimer_timeout():
 	#
@@ -85,7 +80,7 @@ func handle_game_over():
 		
 func _on_enemy_dies(enemy):
 	$HitSound.play()
-	food_count = food_count + 1
+	food_count = food_count + 3
 	$HUD.update_score(food_count)
 	if "Enemy_Fly" in enemy.get_name():
 		all_flys.erase(enemy)
@@ -96,3 +91,8 @@ func _on_enemy_dies(enemy):
 func _on_Tama_change_animation(animation):
 	$TamaAnimatedSprite.play(animation)
 
+func _on_Tama_tama_update(happiness, hungriness):
+	$HUD.update_happy_hunger(happiness, hungriness)
+
+func _on_Tama_tama_died():
+	print("_on_Tama_tama_died")
