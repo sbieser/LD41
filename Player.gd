@@ -27,6 +27,7 @@ var hit_buttons = [] #array of buttons hit by the current attack
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	#position = Vector2(0,33)
 	$AttackArea.visible = false
 	#facing = RIGHT_FACING
 	change_state(IDLE)
