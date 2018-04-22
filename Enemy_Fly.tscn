@@ -23,7 +23,7 @@ animations = [ {
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Enemy_Fly" type="KinematicBody2D" index="0" groups=[
+[node name="Enemy_Fly" type="KinematicBody2D" groups=[
 "enemy",
 ]]
 
@@ -78,7 +78,6 @@ shape = SubResource( 2 )
 position = Vector2( 2.05623, 15.6785 )
 frames = SubResource( 1 )
 animation = "move1"
-frame = 1
 playing = true
 
 [node name="HitBox2" type="CollisionShape2D" parent="." index="3"]

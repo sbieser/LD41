@@ -46,8 +46,10 @@ func hit_detected():
 
 func move_directions():
 	if direction == "right":
+		$AnimatedSprite.flip_h = true
 		position = Vector2(self.position.x + SPEEDX, self.position.y)
 	else:
+		$AnimatedSprite.flip_h = false
 		self.position = Vector2(self.position.x - SPEEDX, self.position.y)
 
 
