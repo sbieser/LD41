@@ -2,12 +2,16 @@ extends Node
 
 onready var grub_scene = preload("res://Enemy_Grub.tscn")
 onready var fly_scene = preload("res://Enemy_Fly.tscn")
+onready var coin_scene = preload("res://Coin.tscn")
 
 export (int) var food_count = 0				# The currency in which to feed the tama
+export (int) var coin_count = 0
 
 var all_grubs = []
 var all_flys = []
+var coins = []
 var spawn_list
+var coin_spawn_list
 
 signal game_over
 
@@ -15,6 +19,8 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
+	coin_spawn_list = $CoinContainer.get_children()
+	print(coin_spawn_list)
 	self.connect( "game_over", self, "_handle_game_over")
 	$HUD.connect( "restart", self, "_handle_restart_game" )
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
@@ -87,3 +93,19 @@ func _on_Tama_tama_update(happiness, hungriness):
 
 func _on_Tama_tama_died():
 	emit_signal("game_over")
+
+func remove_coin(coin):
+	coin_count = coin_count + 1
+	#$HUD.update_coin(coin_count)
+	if coin in coins:
+		coins.erase(coin)
+	
+func _on_Coin_Timer_timeout():
+	randomize()
+	if coins.size() < 5 && randi()%2 == 1:
+		var coin_instance = coin_scene.instance()
+		print(randi()%coin_spawn_list.size())
+		var i = coin_spawn_list[randi()%coin_spawn_list.size()]
+		coin_instance.position = i.position
+		add_child(coin_instance)
+		coins.push_back(coin_instance)
