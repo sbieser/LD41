@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 signal hit
+signal enemy_died
+signal changed_directions
 
 export (float) var SPEEDX = 60
 var gravity = 500
@@ -28,10 +30,11 @@ func _physics_process(delta):
 	
 func remove_enemy():
 	queue_free()
+	emit_signal("enemy_died")
 	
 func hit_detected():
 	hitpoint = hitpoint - 1
-	
+	emit_signal("hit")
 	if hitpoint < 1:
 		remove_enemy()
 
@@ -49,8 +52,6 @@ func move_directions():
 		
 
 func _on_Area2D_body_entered(body):
-	emit_signal("hit")
-	
 	if direction == "left":
 		direction = "right"
 	else: 

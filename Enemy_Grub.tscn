@@ -3,7 +3,7 @@
 [ext_resource path="res://Enemy_Grub.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
@@ -12,7 +12,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=2]
 
 custom_solver_bias = 0.0
 radius = 10.0
@@ -51,14 +51,14 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D" index="0"]
 
 position = Vector2( -0.621979, 0.136627 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "move1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="1"]
 
 position = Vector2( -0.38747, 15.2139 )
 scale = Vector2( 3.15859, 0.836912 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
@@ -67,7 +67,6 @@ visible = false
 position = Vector2( -0.143078, 19.2053 )
 scale = Vector2( 3.2021, 1.03361 )
 shape = SubResource( 3 )
-disabled = true
 _sections_unfolded = [ "Transform" ]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

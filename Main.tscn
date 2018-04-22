@@ -6,7 +6,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -78,7 +78,7 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Offset", "Smoothing", 
 
 [node name="SpawnGrub_1" type="Position2D" parent="." index="6"]
 
-position = Vector2( 105.678, 390.892 )
+position = Vector2( 210.899, 362.499 )
 __meta__ = {
 "_edit_group_": true
 }
