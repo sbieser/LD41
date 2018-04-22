@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=2]
@@ -55,6 +55,11 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 24.9459 )
 
 [node name="Player" type="KinematicBody2D" index="0"]
 
@@ -113,6 +118,21 @@ process_mode = 1
 wait_time = 0.7
 one_shot = true
 autostart = false
+
+[node name="CollectionArea" type="Area2D" parent="." index="4"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea" index="0"]
+
+position = Vector2( 1.18914, 6.42135 )
+shape = SubResource( 4 )
 
 [connection signal="timeout" from="AttackArea/AttackTimer" to="." method="_on_AttackTimer_timeout"]
 

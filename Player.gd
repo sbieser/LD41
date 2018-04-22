@@ -3,8 +3,7 @@ extends KinematicBody2D
 #if anything outside of this class needs to know if the player was hit, it could connect to this
 signal hit
 signal button_pressed(button_type)
-
-#export (int) var walk_speed
+signal coin_collected(coin)
 
 export (int) var jump_speed = -200
 export (int) var gravity = 500
@@ -210,6 +209,13 @@ func _physics_process(delta):
 					change_state(WALK)
 				else:
 					change_state(IDLE)
+					
+	
+	var collected_areas = $CollectionArea.get_overlapping_areas()
+	for collected_area in collected_areas:
+		if collected_area.is_in_group("coin"):
+			emit_signal("coin_collected", collected_area)
+	
 	#check attacking
 	if state == ATTACK:
 		#var bodies = $AttackArea.get_overlapping
