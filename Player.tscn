@@ -1,23 +1,23 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=2]
-[ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=3]
-[ext_resource path="res://textures/player_anims/player_idle2.png" type="Texture" id=4]
-[ext_resource path="res://textures/player_anims/player_idle3.png" type="Texture" id=5]
-[ext_resource path="res://textures/player_anims/player_idle4.png" type="Texture" id=6]
-[ext_resource path="res://textures/player_anims/player_idle5.png" type="Texture" id=7]
-[ext_resource path="res://textures/player_anims/player_idle6.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/player_walk1.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/player_walk2.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/player_walk3.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/player_walk4.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/player_jump.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/player_idle2.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/player_idle3.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/player_idle4.png" type="Texture" id=11]
+[ext_resource path="res://textures/player_anims/player_idle5.png" type="Texture" id=12]
+[ext_resource path="res://textures/player_anims/player_idle6.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 16, 32 )
-
-[sub_resource type="StreamTexture" id=4]
-
-flags = 4
-load_path = "res://.import/player_idle.jpg-8060adf1ac83e315cf9b73fd7b9c54ac.stex"
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -27,12 +27,17 @@ animations = [ {
 "name": "duck",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 4 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
