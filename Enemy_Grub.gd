@@ -1,10 +1,12 @@
-extends Area2D
+extends KinematicBody2D
 
 signal hit
 
-export (int) var SPEED = 1
+export (float) var SPEEDX = 60
+var gravity = 500
 var hitpoint = 1
 var direction = "left"
+var velocity = Vector2()
 
 
 # class member variables go here, for example:
@@ -14,37 +16,42 @@ var direction = "left"
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	print(self.position)
-	move()
+	move_directions()
 
 func _process(delta):
-	if hitpoint > 0 :
-		move()
+	if hitpoint > 0:
+		move_directions()
 
+func _physics_process(delta):
+	velocity.y += gravity * delta	
+	velocity = move_and_slide(velocity, Vector2(0,-1))
+	
 func remove_enemy():
 	queue_free()
 	
 func hit_detected():
-	hitpoint = hitpoint -1
+	hitpoint = hitpoint - 1
 	
 	if hitpoint < 1:
 		remove_enemy()
 
-func _on_Enemy_Grub_body_entered(body):
+func move_directions():
+	velocity.x = 0
+	if direction == "right":
+		velocity.x -= SPEEDX
+		#self.position = Vector2(self.position.x + SPEEDX, self.position.y);
+		#self.move_and_slide(Vector2(SPEED, 9.8), Vector2(0, 0))
+	else:
+		velocity.x += SPEEDX
+		#self.set_linear_velocity(Vector2(-SPEED, 0));
+		#self.position = Vector2(self.position.x - SPEEDX, self.position.y);
+		#self.move_and_slide(Vector2(-SPEED, 9.8), Vector2(0, 0))
+		
+
+func _on_Area2D_body_entered(body):
 	emit_signal("hit")
 	
-	if body is TileMap:
-		if direction == "left":
-			direction = "right"
-		else: 
-			direction = "left"
-		
-		move()
-
-func move():
-	if direction == "right":
-		self.position = Vector2( self.position.x + SPEED, self.position.y);
-	else:
-		#self.set_linear_velocity(Vector2(-SPEED, 0));
-		self.position = Vector2( self.position.x - SPEED, self.position.y);
-		
+	if direction == "left":
+		direction = "right"
+	else: 
+		direction = "left"
