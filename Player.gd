@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 #if anything outside of this class needs to know if the player was hit, it could connect to this
 signal hit
-signal button_pressed
+signal button_pressed(button_type)
 
 #export (int) var walk_speed
 
@@ -56,12 +56,10 @@ func change_state(new_state):
 				$AttackArea.visible = true
 				get_node("AttackArea/AttackTimer").start()
 			CROUCH_ATTACK:
-				#new_anim = "crouch_attack"
 				$AttackArea.visible = true
 				get_node("AttackArea/AttackTimer").start()
 			JUMP:
-				#new_anim = "jump"
-				new_anim = "idle"
+				new_anim = "jump"
 	
 	if state == WALK or state == CROUCH_WALK:
 		change_direction()
@@ -225,12 +223,12 @@ func _physics_process(delta):
 		for area in areas:
 			if area.is_in_group("enemy") and not hit_enemies.has(area):
 				hit_enemies.append(area)
-				#enemy take damage?
-				print("hit food")
+				print("hit enemy")
 			elif area.is_in_group("button") and not hit_buttons.has(area):
+				#print(area.get_parent().type)
 				hit_buttons.append(area)
-				emit_signal("button_pressed")
-				print("hit button")
+				emit_signal("button_pressed", area.get_parent().type)
+				#print("hit button")
 				
 				
 	#check if stunned			

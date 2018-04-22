@@ -1,17 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://textures/buttons/food_btn.png" type="Texture" id=1]
+[ext_resource path="res://Button.gd" type="Script" id=1]
+[ext_resource path="res://textures/buttons/food_btn.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="Button" type="Node2D" groups=[
+[node name="Button" type="Node2D"]
+
+script = ExtResource( 1 )
+type = null
+
+[node name="Area2D" type="Area2D" parent="." index="0" groups=[
 "button",
 ]]
-
-[node name="Area2D" type="Area2D" parent="." index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -25,10 +29,10 @@ audio_bus_name = "Master"
 "button",
 ]]
 
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="1"]
 
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 
