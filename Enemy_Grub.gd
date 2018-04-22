@@ -18,6 +18,12 @@ var velocity = Vector2()
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	randomize()
+	if (randi()%11 + 1) > 4 :
+		direction = "right"
+	else:
+		direction = "left"
+		
 	move_directions()
 
 func _process(delta):

@@ -18,7 +18,12 @@ var direction = "left"
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	print(self.position)
+	randomize()
+	if (randi()%11 + 1) > 4 :
+		direction = "right"
+	else:
+		direction = "left"
+	
 	move_fly()
 
 func _process(delta):
