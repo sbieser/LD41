@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Tama.gd" type="Script" id=1]
 
-[node name="Tama" type="Node" index="0"]
+[node name="Tama" type="Node"]
 
 script = ExtResource( 1 )
 animation_change = 10
