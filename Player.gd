@@ -124,11 +124,6 @@ func print_state():
 			print("CROUCH_WALK")
 
 func handle_input():
-	#print_state()
-	
-	#if state == ATTACK:
-	#	print("returning")
-	#	return
 	
 	#Left/Right - Move
 	#Up         - Look up / Climb
@@ -137,7 +132,7 @@ func handle_input():
 	#Z          - Jump
 	var right = Input.is_action_pressed("ui_right") #movement right
 	var left = Input.is_action_pressed("ui_left") # movement left
-	var down = Input.is_action_pressed("ui_down") # crouch button
+	var down = false#Input.is_action_pressed("ui_down") # crouch button
 	var x = Input.is_action_just_pressed("ui_x")
 	var z = Input.is_action_pressed("ui_z") # jump button
 	

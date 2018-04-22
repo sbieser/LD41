@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/ChevyRay - Softsquare.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://textures/meters/empty.png" type="Texture" id=3]
+[ext_resource path="res://textures/meters/hungry_empty.png" type="Texture" id=3]
+[ext_resource path="res://textures/meters/hungry_full.png" type="Texture" id=4]
+[ext_resource path="res://textures/meters/happy_empty.png" type="Texture" id=5]
+[ext_resource path="res://textures/meters/happy_full.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -10,7 +13,7 @@ size = 16
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
@@ -53,16 +56,31 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 1 )
 
-[node name="FoodLabel" type="Label" parent="." index="0"]
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 37.0
-margin_top = -1.0
-margin_right = 178.0
-margin_bottom = 64.0
+margin_right = 640.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.603922, 0.737255, 0.054902, 1 )
+
+[node name="FoodLabel" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 30.0
+margin_right = 171.0
+margin_bottom = 65.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -70,20 +88,21 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "Food:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="FoodCount" type="Label" parent="." index="1"]
+[node name="FoodCount" type="Label" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 79.0
-margin_right = 119.0
+margin_left = 70.0
+margin_right = 110.0
 margin_bottom = 33.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -92,13 +111,14 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="HungerLabel" type="Label" parent="." index="2"]
+[node name="HungerLabel" type="Label" parent="." index="3"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -116,31 +136,50 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "Hunger"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Hunger1" type="Sprite" parent="HungerLabel" index="0"]
-
-position = Vector2( 108, 8 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Hunger2" type="Sprite" parent="HungerLabel" index="1"]
+[node name="HungerEmpty1" type="Sprite" parent="HungerLabel" index="0"]
 
 position = Vector2( 68, 8 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Hunger3" type="Sprite" parent="HungerLabel" index="2"]
+[node name="HungerFull1" type="Sprite" parent="HungerLabel" index="1"]
+
+position = Vector2( 68, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HungerEmpty2" type="Sprite" parent="HungerLabel" index="2"]
 
 position = Vector2( 88, 8 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="HappyLabel" type="Label" parent="." index="3"]
+[node name="HungerFull2" type="Sprite" parent="HungerLabel" index="3"]
+
+position = Vector2( 88, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HungerEmpty3" type="Sprite" parent="HungerLabel" index="4"]
+
+position = Vector2( 108, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="HungerFull3" type="Sprite" parent="HungerLabel" index="5"]
+
+position = Vector2( 108, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="HappyLabel" type="Label" parent="." index="4"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -157,31 +196,50 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "Happy"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Happy1" type="Sprite" parent="HappyLabel" index="0"]
-
-position = Vector2( 98, 8 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
-
-[node name="Happy2" type="Sprite" parent="HappyLabel" index="1"]
+[node name="HappyEmpty1" type="Sprite" parent="HappyLabel" index="0"]
 
 position = Vector2( 58, 8 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
-[node name="Happy3" type="Sprite" parent="HappyLabel" index="2"]
+[node name="HappyFull1" type="Sprite" parent="HappyLabel" index="1"]
+
+position = Vector2( 58, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="HappyEmpty2" type="Sprite" parent="HappyLabel" index="2"]
 
 position = Vector2( 78, 8 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
-[node name="GameOverLabel" type="Label" parent="." index="4"]
+[node name="HappyFull2" type="Sprite" parent="HappyLabel" index="3"]
+
+position = Vector2( 78, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="HappyEmpty3" type="Sprite" parent="HappyLabel" index="4"]
+
+position = Vector2( 98, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="HappyFull3" type="Sprite" parent="HappyLabel" index="5"]
+
+position = Vector2( 98, 8 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="GameOverLabel" type="Label" parent="." index="5"]
 
 visible = false
 anchor_left = 0.0
@@ -190,8 +248,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 200.0
 margin_top = 120.0
-margin_right = 40.0
-margin_bottom = 14.0
+margin_right = 452.0
+margin_bottom = 169.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -199,13 +257,14 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "Game Over"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
 
-[node name="RetryLabel" type="Label" parent="." index="5"]
+[node name="RetryLabel" type="Label" parent="." index="6"]
 
 visible = false
 anchor_left = 0.0
@@ -214,8 +273,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 160.0
 margin_top = 280.0
-margin_right = 40.0
-margin_bottom = 14.0
+margin_right = 269.0
+margin_bottom = 313.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -223,13 +282,14 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "Retry?"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
 
-[node name="QuitLabel" type="Label" parent="." index="6"]
+[node name="QuitLabel" type="Label" parent="." index="7"]
 
 visible = false
 anchor_left = 0.0
@@ -238,8 +298,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 410.0
 margin_top = 280.0
-margin_right = 200.0
-margin_bottom = 294.0
+margin_right = 490.0
+margin_bottom = 313.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -247,10 +307,11 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.188235, 0.384314, 0.188235, 1 )
 text = "Quit?"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
 
 

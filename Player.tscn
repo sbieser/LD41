@@ -1,26 +1,26 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=2]
-[ext_resource path="res://textures/player_anims/player_attack_new1.png" type="Texture" id=3]
-[ext_resource path="res://textures/player_anims/player_attack_new2.png" type="Texture" id=4]
-[ext_resource path="res://textures/player_anims/player_attack_new3.png" type="Texture" id=5]
-[ext_resource path="res://textures/player_anims/player_jump.png" type="Texture" id=6]
-[ext_resource path="res://textures/player_anims/player_walk1.png" type="Texture" id=7]
-[ext_resource path="res://textures/player_anims/player_walk2.png" type="Texture" id=8]
-[ext_resource path="res://textures/player_anims/player_walk3.png" type="Texture" id=9]
-[ext_resource path="res://textures/player_anims/player_walk4.png" type="Texture" id=10]
-[ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=11]
-[ext_resource path="res://textures/player_anims/player_idle2.png" type="Texture" id=12]
-[ext_resource path="res://textures/player_anims/player_idle3.png" type="Texture" id=13]
-[ext_resource path="res://textures/player_anims/player_idle4.png" type="Texture" id=14]
-[ext_resource path="res://textures/player_anims/player_idle5.png" type="Texture" id=15]
-[ext_resource path="res://textures/player_anims/player_idle6.png" type="Texture" id=16]
+[ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=2]
+[ext_resource path="res://textures/player_anims/player_idle2.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/player_idle3.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/player_idle4.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/player_idle5.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/player_idle6.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/player_walk1.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/player_walk2.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/player_walk3.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/player_walk4.png" type="Texture" id=11]
+[ext_resource path="res://textures/player_anims/player_attack_new1.png" type="Texture" id=12]
+[ext_resource path="res://textures/player_anims/player_attack_new2.png" type="Texture" id=13]
+[ext_resource path="res://textures/player_anims/player_attack_new3.png" type="Texture" id=14]
+[ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=15]
+[ext_resource path="res://textures/player_anims/player_jump.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 16, 32 )
+extents = Vector2( 14, 30 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -30,40 +30,40 @@ extents = Vector2( 16, 32 )
 [sub_resource type="SpriteFrames" id=3]
 
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "duck",
+"name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "new_attack",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "new_attack",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 15 ) ],
 "loop": true,
-"name": "idle",
+"name": "duck",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "jump",
 "speed": 5.0
 } ]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
-collision_layer = 1
+collision_layer = 2
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Collision", "Transform", "Visibility", "collision" ]
 jump_speed = -300
 gravity = 500
 run_speed = 165
@@ -73,7 +73,6 @@ facing = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="AttackArea" type="Area2D" parent="." index="1"]
 
@@ -105,8 +104,7 @@ autostart = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
 
 frames = SubResource( 3 )
-animation = "new_attack"
-frame = 2
+animation = "idle"
 _sections_unfolded = [ "Transform" ]
 
 [node name="StunIdleTimer" type="Timer" parent="." index="3"]

@@ -2,16 +2,12 @@ extends Node
 
 onready var grub_scene = preload("res://Enemy_Grub.tscn")
 onready var fly_scene = preload("res://Enemy_Fly.tscn")
-onready var coin_obj = preload("res://Coin.tscn")
 
 export (int) var food_count = 0				# The currency in which to feed the tama
-export (int) var coin_count = 0
 
 var all_grubs = []
 var all_flys = []
-var coins = []
 var spawn_list
-var coin_spawn_list
 
 signal game_over
 
@@ -19,7 +15,6 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
-	coin_spawn_list = $CoinPointContainer.get_children()
 	self.connect( "game_over", self, "_handle_game_over")
 	$HUD.connect( "restart", self, "_handle_restart_game" )
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
@@ -58,28 +53,9 @@ func _on_SpawnTimer_timeout():
 		fly_instance.position = i.position
 		add_child(fly_instance)
 		all_flys.push_back(fly_instance)
-		
-func _handle_coin():
-	if coins.size() < 5 && randi()%2 == 1:
-		var index = randi()%coin_spawn_list.size()
-		var coin_instance = coin_obj.instance()
-		coin_instance.position = coin_spawn_list[index].position
-		add_child(coins)
-		coins.push_back(coin_instance)
 
 func _handle_restart_game():
 	print("handling retry")
-	for coin in coins:		#erase all coins in the list
-		coins.erase(coin)
-		
-	for fly in all_flys:		#erase all flies in the list
-		all_flys.erase(fly)
-		
-	for grub in all_grubs:		#erase all grubs in the list
-		all_grubs.erase(grub)
-	
-	coin_count = 0
-	food_count = 0
 	#$HUD.emit_signal("restart")
 	pass
 	
@@ -99,10 +75,6 @@ func _on_enemy_dies(enemy):
 		all_flys.erase(enemy)
 	elif "Enemy_Grub" in enemy.get_name():
 		all_grubs.erase(enemy)
-
-func _on_pick_up_coin(coin):
-	coin_count = coin_count + 1
-	coins.erase(coin)
 		
 func _on_Tama_change_animation(animation):
 	$TamaAnimatedSprite.play(animation)
