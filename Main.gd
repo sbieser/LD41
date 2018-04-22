@@ -12,11 +12,18 @@ var all_grubs = []
 var all_flys = []
 var spawn_list
 
+signal restart
+signal main_menu
+signal game_over
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
-	pass
+	self.connect( "game_over", self, "handle_game_over")
+	self.connect( "restart", self, "handle_restart_game" )
+	self.connect( "main_menu", self, "handle_main_menu" )
+	#self.connect( "enemy_died", self, "_on_Player_hit" )
 
 func _on_Timer_timeout():
 	#pass # replace with function body
@@ -48,6 +55,7 @@ func _on_Player_hit():
 	$HUD.update_score(food_count)
 	
 func _on_SpawnTimer_timeout():
+	#
 	if all_flys.size() < 5:
 		randomize()
 		var fly_instance = fly_scene.instance()
@@ -56,3 +64,16 @@ func _on_SpawnTimer_timeout():
 		fly_instance.position = i.position
 		add_child(fly_instance)
 		all_flys.push_back(fly_instance)
+
+func handle_restart_game():
+	print("handling retry")
+	$HUD.emit_signal("restart")
+	pass
+	
+func handle_main_menu():
+	print("handling main menu")
+	$HUD.emit_signal("main_menu")
+	pass
+	
+func handle_game_over():
+	$HUD.emit_signal("game_over")

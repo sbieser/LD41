@@ -23,7 +23,9 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[node name="Enemy_Grub" type="KinematicBody2D" index="0"]
+[node name="Enemy_Grub" type="KinematicBody2D" groups=[
+"enemy",
+]]
 
 position = Vector2( -0.0769463, 0.92334 )
 input_pickable = false
@@ -33,8 +35,11 @@ collision/safe_margin = 0.08
 script = ExtResource( 1 )
 SPEEDX = 1
 
-[node name="Left_side" type="Area2D" parent="." index="0"]
+[node name="Left_side" type="Area2D" parent="." index="0" groups=[
+"enemy",
+]]
 
+editor/display_folded = true
 position = Vector2( 0.391144, 0.993797 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -55,8 +60,11 @@ scale = Vector2( 0.17794, 1.01821 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Right_side" type="Area2D" parent="." index="1"]
+[node name="Right_side" type="Area2D" parent="." index="1" groups=[
+"enemy",
+]]
 
+editor/display_folded = true
 position = Vector2( 0.776672, 1.37933 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -76,7 +84,9 @@ scale = Vector2( 0.103791, 0.998443 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="Body" type="CollisionShape2D" parent="." index="2" groups=[
+"enemy",
+]]
 
 position = Vector2( 0.198606, 7.56954 )
 scale = Vector2( 3.10406, 0.998441 )

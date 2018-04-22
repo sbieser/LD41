@@ -4,12 +4,12 @@
 [ext_resource path="res://textures/player_anims/fly1.png" type="Texture" id=2]
 [ext_resource path="res://textures/player_anims/fly2.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 0.999992, 9.6346 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
@@ -36,8 +36,11 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Transform" ]
 SPEED = 3
 
-[node name="LeftSide" type="Area2D" parent="." index="0"]
+[node name="LeftSide" type="Area2D" parent="." index="0" groups=[
+"enemy",
+]]
 
+editor/display_folded = true
 position = Vector2( -5.94397, 15.0359 )
 scale = Vector2( 0.440762, 0.26104 )
 input_pickable = false
@@ -52,9 +55,11 @@ audio_bus_name = "Master"
 
 position = Vector2( -6.31953, 3.1953 )
 scale = Vector2( 2.14489, 3.33188 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
-[node name="RightSide" type="Area2D" parent="." index="1"]
+[node name="RightSide" type="Area2D" parent="." index="1" groups=[
+"enemy",
+]]
 
 editor/display_folded = true
 position = Vector2( -6.68277, 15.807 )
@@ -71,13 +76,16 @@ audio_bus_name = "Master"
 
 position = Vector2( 29.6876, -1.26256 )
 scale = Vector2( 0.883447, 3.34499 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2" groups=[
+"enemy",
+]]
 
 position = Vector2( 2.05623, 15.6785 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "move1"
+frame = 1
 playing = true
 
 [node name="HitBox2" type="CollisionShape2D" parent="." index="3"]
