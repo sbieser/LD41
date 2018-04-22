@@ -51,6 +51,7 @@ type = 2
 
 [node name="Player" parent="." index="5" instance=ExtResource( 4 )]
 
+editor/display_folded = true
 position = Vector2( 506.151, 221.058 )
 
 [node name="Camera2D" type="Camera2D" parent="Player" index="4"]
@@ -82,6 +83,7 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Offset", "Smoothing", 
 
 [node name="SpawnGrub_1" type="Position2D" parent="." index="6"]
 
+editor/display_folded = true
 position = Vector2( 210.899, 362.499 )
 __meta__ = {
 "_edit_group_": true
@@ -109,6 +111,13 @@ process_mode = 1
 wait_time = 5.0
 one_shot = false
 autostart = true
+
+[node name="Fly_spawn2" type="Position2D" parent="." index="9"]
+
+position = Vector2( 66, -104 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 

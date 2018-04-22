@@ -10,10 +10,12 @@ export (int) var food_count = 0				# The currency in which to feed the tama
 
 var all_grubs = []
 var all_flys = []
+var spawn_list
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
 	pass
 
 func _on_Timer_timeout():
@@ -21,7 +23,8 @@ func _on_Timer_timeout():
 	#print("main::_on_Timer_timeout")
 	if all_grubs.size() < 5:
 		var grub_instance = grub_scene.instance()
-		grub_instance.position = $SpawnGrub_1.position
+		var i = spawn_list[randi()%3]
+		grub_instance.position = i.position
 		add_child(grub_instance)
 		all_grubs.push_back(grub_instance)
 
@@ -49,7 +52,10 @@ func _on_Player_hit():
 
 func _on_SpawnTimer_timeout():
 	if all_flys.size() < 5:
+		randomize()
 		var fly_instance = fly_scene.instance()
-		fly_instance.position = $Fly_spawn1.position
+		var i = spawn_list[randi()%3]
+			
+		fly_instance.position = i.position
 		add_child(fly_instance)
 		all_flys.push_back(fly_instance)
