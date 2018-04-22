@@ -3,6 +3,16 @@
 [ext_resource path="res://Enemy_Grub.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
@@ -12,18 +22,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
-
-custom_solver_bias = 0.0
-radius = 10.0
-height = 20.0
-
-[sub_resource type="CapsuleShape2D" id=3]
-
-custom_solver_bias = 0.0
-radius = 10.0
-height = 20.0
-
 [node name="Enemy_Grub" type="KinematicBody2D" index="0"]
 
 position = Vector2( -0.0769463, 0.92334 )
@@ -32,11 +30,11 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-SPEEDX = 60
+SPEEDX = 1
 
-[node name="Area2D" type="Area2D" parent="." index="0"]
+[node name="Left_side" type="Area2D" parent="." index="0"]
 
-position = Vector2( 0.391144, 0.0942076 )
+position = Vector2( 0.648163, 1.25082 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -48,28 +46,49 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left_side" index="0"]
 
-position = Vector2( -0.621979, 0.136627 )
-frames = SubResource( 2 )
-animation = "move1"
+position = Vector2( -31.1641, 14.4792 )
+scale = Vector2( 0.17794, 1.63606 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="1"]
+[node name="Right_side" type="Area2D" parent="." index="1"]
 
-position = Vector2( -0.38747, 15.2139 )
-scale = Vector2( 3.15859, 0.836912 )
+position = Vector2( 0.648163, 1.25082 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right_side" index="0"]
+
+position = Vector2( 29.4936, 14.4792 )
+scale = Vector2( 0.17794, 1.63606 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( -0.187062, 15.7943 )
+scale = Vector2( 2.85692, 1.641 )
 shape = SubResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="3"]
 
-visible = false
-position = Vector2( -0.143078, 19.2053 )
-scale = Vector2( 3.2021, 1.03361 )
-shape = SubResource( 3 )
-disabled = true
-_sections_unfolded = [ "Transform" ]
+position = Vector2( 0.026184, 1.38744 )
+frames = SubResource( 2 )
+animation = "move1"
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Left_side" to="." method="_on_Left_side_body_entered"]
+
+[connection signal="body_entered" from="Right_side" to="." method="_on_Right_side_body_entered"]
 
 

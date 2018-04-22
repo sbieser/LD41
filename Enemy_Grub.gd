@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal hit
 
-export (float) var SPEEDX = 60
+export (float) var SPEEDX = 1
 var gravity = 500
 var hitpoint = 1
 var direction = "left"
@@ -36,22 +36,15 @@ func hit_detected():
 		remove_enemy()
 
 func move_directions():
-	velocity.x = 0
 	if direction == "right":
-		velocity.x -= SPEEDX
-		#self.position = Vector2(self.position.x + SPEEDX, self.position.y);
-		#self.move_and_slide(Vector2(SPEED, 9.8), Vector2(0, 0))
+		position = Vector2(self.position.x + SPEEDX, self.position.y)
 	else:
-		velocity.x += SPEEDX
-		#self.set_linear_velocity(Vector2(-SPEED, 0));
-		#self.position = Vector2(self.position.x - SPEEDX, self.position.y);
-		#self.move_and_slide(Vector2(-SPEED, 9.8), Vector2(0, 0))
-		
+		self.position = Vector2(self.position.x - SPEEDX, self.position.y)
 
-func _on_Area2D_body_entered(body):
-	emit_signal("hit")
-	
-	if direction == "left":
-		direction = "right"
-	else: 
-		direction = "left"
+
+func _on_Left_side_body_entered(body):
+	direction = "right"
+
+
+func _on_Right_side_body_entered(body):
+	direction = "left"
