@@ -13,7 +13,7 @@ export (int) var walk_speed = 85
 export (int) var facing = 0
 
 #TODO: We need to have states to show which direction the player is facing, left or right
-enum {IDLE, JUMP, ATTACK, WALK, CROUCH_IDLE, CROUCH_WALK, CROUCH_ATTACK, STUNNED, STUNNED_IDLE}
+enum {IDLE, JUMP, ATTACK, WALK, CROUCH_IDLE, CROUCH_WALK, STUNNED, STUNNED_IDLE}
 enum {RIGHT_FACING, LEFT_FACING}
 var velocity = Vector2()
 var state
@@ -27,9 +27,7 @@ var hit_buttons = [] #array of buttons hit by the current attack
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	#position = Vector2(0,33)
 	$AttackArea.visible = false
-	#facing = RIGHT_FACING
 	change_state(IDLE)
 
 func change_direction():
@@ -39,26 +37,21 @@ func change_direction():
 		facing = RIGHT_FACING
 
 func change_state(new_state):
+	print("change_state")
 	if new_state != state:
 		state = new_state
 		match state:
 			IDLE:
 				new_anim = "idle"
 			CROUCH_IDLE:
-				#new_anim = "crouch"
 				new_anim = "duck"
 			WALK:
 				new_anim = "walk"
 			CROUCH_WALK:
-				#new_anim = "crouch_walk"
 				new_anim = "duck"
 			ATTACK:
-				new_anim = "attack"
+				new_anim = "new_attack"
 				$AttackArea.visible = true
-				get_node("AttackArea/AttackTimer").start()
-			CROUCH_ATTACK:
-				$AttackArea.visible = true
-				get_node("AttackArea/AttackTimer").start()
 			JUMP:
 				new_anim = "jump"
 	
@@ -66,31 +59,37 @@ func change_state(new_state):
 		change_direction()
 	
 	#change player size based on standing or crouching
-	if state == CROUCH_IDLE or state == CROUCH_WALK or state == CROUCH_ATTACK:
+	if state == CROUCH_IDLE or state == CROUCH_WALK:
 		$CollisionShape2D.shape.set_extents(Vector2(16,16))
 		$CollisionShape2D.position = Vector2(0,16)
-		#$AnimatedSprite.position = Vector2(0,16)
 	else:
+		if new_anim == "new_attack":
+			if facing == LEFT_FACING:
+				$AnimatedSprite.position = Vector2(-16,0)
+			else:
+				$AnimatedSprite.position = Vector2(16,0)
+		else:
+			$AnimatedSprite.position = Vector2(0,0)
 		$CollisionShape2D.shape.set_extents(Vector2(16,32))
 		$CollisionShape2D.position = Vector2(0,0)
-		$AnimatedSprite.position = Vector2(0,0)
 	
 	if facing == LEFT_FACING:
 		$AnimatedSprite.flip_h = true
-		if state == CROUCH_WALK or state == CROUCH_IDLE or state == CROUCH_ATTACK:
-			get_node("AttackArea/CollisionShape2D").position = Vector2(-33,16)
+		if state == CROUCH_WALK or state == CROUCH_IDLE:
+			get_node("AttackArea/CollisionShape2D").position = Vector2(-32,16)
 			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,16))
 		else:
-			get_node("AttackArea/CollisionShape2D").position = Vector2(-33,0)
+			get_node("AttackArea/CollisionShape2D").position = Vector2(-32,0)
 			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,32))
 	else:
 		$AnimatedSprite.flip_h = false
-		if state == CROUCH_WALK or state == CROUCH_IDLE or state == CROUCH_ATTACK:
-			get_node("AttackArea/CollisionShape2D").position = Vector2(33,16)
+		if state == CROUCH_WALK or state == CROUCH_IDLE:
+			get_node("AttackArea/CollisionShape2D").position = Vector2(32,16)
 			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,16))
 		else:
-			get_node("AttackArea/CollisionShape2D").position = Vector2(33,0)
+			get_node("AttackArea/CollisionShape2D").position = Vector2(32,0)
 			get_node("AttackArea/CollisionShape2D").shape.set_extents(Vector2(16,32))
+
 	
 func handle_horizontal_movement():
 	var right = Input.is_action_pressed("ui_right") #movement right
@@ -110,7 +109,6 @@ func handle_action():
 	
 	
 func print_state():
-	#enum {IDLE, JUMP, ATTACK, WALK, CROUCH_IDLE, CROUCH_WALK, CROUCH_ATTACK}
 	match state:
 		IDLE:
 			print("IDLE")
@@ -124,14 +122,13 @@ func print_state():
 			print("CROUCH_IDLE")
 		CROUCH_WALK:
 			print("CROUCH_WALK")
-		CROUCH_ATTACK:
-			print("CROUCH_ATTAK")
 
 func handle_input():
 	#print_state()
 	
-	if state == ATTACK or state == CROUCH_ATTACK:
-		return
+	#if state == ATTACK:
+	#	print("returning")
+	#	return
 	
 	#Left/Right - Move
 	#Up         - Look up / Climb
@@ -141,7 +138,7 @@ func handle_input():
 	var right = Input.is_action_pressed("ui_right") #movement right
 	var left = Input.is_action_pressed("ui_left") # movement left
 	var down = Input.is_action_pressed("ui_down") # crouch button
-	var x = Input.is_action_pressed("ui_x") # action / attack button
+	var x = Input.is_action_just_pressed("ui_x")
 	var z = Input.is_action_pressed("ui_z") # jump button
 	
 	#set velocity to 0 initially
@@ -157,13 +154,11 @@ func handle_input():
 				change_state(JUMP)
 			elif down:
 				change_state(CROUCH_IDLE)
-			elif x:
+			elif x and state != ATTACK:
 				change_state(ATTACK)
 		CROUCH_IDLE:
 			if velocity.x != 0:
 				change_state(CROUCH_WALK)
-			elif x:
-				change_state(CROUCH_ATTACK)
 			elif z and is_on_floor():
 				velocity.y = jump_speed
 				change_state(JUMP)
@@ -195,17 +190,20 @@ func handle_input():
 			elif velocity.x == 0:
 				change_state(IDLE)
 		JUMP:
-			if x:
+			if x and state != ATTACK:
 				change_state(ATTACK)
 		ATTACK:
 			pass
 	
 func _process(delta):
 	handle_input()
+	
 	if new_anim != anim:
 		anim = new_anim
 		$AnimatedSprite.play(anim)
-	
+		if anim == "new_attack":
+			get_node("AttackArea/AttackTimer").start()
+		
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0,-1))
@@ -217,7 +215,6 @@ func _physics_process(delta):
 					change_state(WALK)
 				else:
 					change_state(IDLE)
-					
 	#check attacking
 	if state == ATTACK:
 		var areas = $AttackArea.get_overlapping_areas()
@@ -227,10 +224,8 @@ func _physics_process(delta):
 				emit_signal("hit")
 				print("hit enemy")
 			elif area.is_in_group("button") and not hit_buttons.has(area):
-				#print(area.get_parent().type)
 				hit_buttons.append(area)
 				emit_signal("button_pressed", area.get_parent().type)
-				#print("hit button")
 				
 				
 	#check if stunned			
@@ -278,22 +273,41 @@ func _physics_process(delta):
 	#			velocity.y = jump_speed
 	#			velocity.x = -velocity.x
 	#			
-	
-func _on_AttackTimer_timeout():
-	#we do this so the same attack doesn't hit a million times on the same body/area
-	hit_bodies.clear()
-	hit_enemies.clear()
-	hit_buttons.clear()
-	
-	get_node("AttackArea/AttackTimer").stop()
-	$AttackArea.visible = false
-	if is_on_floor():
-		change_state(IDLE)
-	else:
-		change_state(JUMP)
-
 
 #func _on_StunTimer_timeout():
 #	#pass # replace with function body
 #	$StunIdleTimer.stop()
 #	change_state(IDLE)
+
+#func _on_AnimatedSprite_animation_finished():
+	#pass
+#	if anim == "new_attack":
+#		print("_on_AnimatedSprite_animation_finished")
+#		#$AnimatedSprite.frame = 0
+#		if is_on_floor():
+#			change_state(IDLE)
+#		else:
+#			change_state(JUMP)
+	#print("_on_AnimatedSprite_animation_finished")
+	#pass
+	#when finished with the attack animation
+#	if anim == "new_attack":
+#		if is_on_floor():
+#			change_state(IDLE)
+#		else:
+#			change_state(JUMP)
+#		print("attack animation finished")
+#		print($AnimatedSprite.frame)
+#		hit_bodies.clear()
+#		hit_enemies.clear()
+#		hit_buttons.clear()
+		
+func _on_AttackTimer_timeout():
+	get_node("AttackArea/AttackTimer").stop()
+	if is_on_floor():
+		change_state(IDLE)
+	else:
+		change_state(JUMP)
+	hit_bodies.clear()
+	hit_enemies.clear()
+	hit_buttons.clear()
