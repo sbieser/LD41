@@ -1,10 +1,12 @@
 extends Node
 
 onready var grub_scene = preload("res://Enemy_Grub.tscn")
+onready var fly_scene = preload("res://Enemy_Fly.tscn")
 
 var food_count = 0
 
 var all_grubs = []
+var all_flys = []
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -40,3 +42,11 @@ func _on_Player_hit():
 	food_count = food_count + 1
 	$HUD.update_score(food_count)
 	
+
+
+func _on_SpawnTimer_timeout():
+	if all_flys.size() < 5:
+		var fly_instance = fly_scene.instance()
+		fly_instance.position = $Fly_spawn1.position
+		add_child(fly_instance)
+		all_flys.push_back(fly_instance)

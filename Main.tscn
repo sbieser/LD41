@@ -6,7 +6,7 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -92,10 +92,26 @@ autostart = true
 
 [node name="HUD" parent="." index="7" instance=ExtResource( 5 )]
 
+[node name="Fly_spawn1" type="Position2D" parent="." index="8"]
+
+position = Vector2( 255.733, 152.031 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SpawnTimer" type="Timer" parent="Fly_spawn1" index="0"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = false
+autostart = true
+
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
 [connection signal="timeout" from="SpawnGrub_1/SpawnTimer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="Fly_spawn1/SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 
 
