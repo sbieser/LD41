@@ -31,7 +31,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 food_count = 0
@@ -61,7 +61,7 @@ position = Vector2( 316.027, -43.9832 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "egg"
-frame = 2
+frame = 3
 playing = true
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -139,7 +139,6 @@ autostart = true
 
 [node name="Fly_spawn1" type="Position2D" parent="." index="9"]
 
-editor/display_folded = true
 position = Vector2( 255.733, 152.031 )
 __meta__ = {
 "_edit_group_": true

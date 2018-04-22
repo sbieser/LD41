@@ -16,9 +16,9 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	
-	self.connect( "game_over", self, "handle_game_over" )
-	self.connect( "restart", self, "start_game")
-	self.connect( "main_menu", self, "main_menu")
+	self.connect("game_over", self, "handle_game_over" )
+	self.connect("restart", self, "start_game")
+	self.connect("main_menu", self, "main_menu")
 	
 
 func _process(delta):
@@ -34,15 +34,20 @@ func main_menu():
 	$GameOverLabel.visible = false
 	$FoodLabel.visible = false
 	$FoodCount.visible = false
+	$HungerLabel.visible = false
+	$HappyLabel.visible = false
 	game = false
 	
 func start_game():
+	print("triggered?")
 	update_score(0)
 	$QuitLabel.visible = false
 	$RetryLabel.visible = false
 	$GameOverLabel.visible = false
 	$FoodLabel.visible = true
 	$FoodCount.visible = true
+	$HungerLabel.visible = true
+	$HappyLabel.visible = true
 	game = false
 	
 func handle_game_over():
@@ -51,6 +56,8 @@ func handle_game_over():
 	$GameOverLabel.visible = true
 	$FoodLabel.visible = false
 	$FoodCount.visible = false
+	$HungerLabel.visible = false
+	$HappyLabel.visible = false
 	$QuitLabel.set("custom_colors/font_color", "FFFFFF")
 	$RetryLabel.set("custom_colors/font_color", "333333")
 	game = true
@@ -66,7 +73,10 @@ func game_over_input():
 	elif left:
 		$QuitLabel.set("custom_colors/font_color", "FFFFFF")
 		$RetryLabel.set("custom_colors/font_color", "333333")
-	else:
-		main.emit_signal("main_menu")
-		main.emit_signal("retry")
+	elif enter:
+		if $QuitLabel.get("custom_colors/font_color") == Color("333333"):
+			emit_signal("main_menu")
+		elif $RetryLabel.get("custom_colors/font_color") == Color("333333"):
+			emit_signal("restart")
+		game = false
 		pass
