@@ -70,7 +70,7 @@ func change_state(new_state):
 				$AnimatedSprite.position = Vector2(16,0)
 		else:
 			$AnimatedSprite.position = Vector2(0,0)
-		$CollisionShape2D.shape.set_extents(Vector2(16,32))
+		$CollisionShape2D.shape.set_extents(Vector2(14,30))
 		$CollisionShape2D.position = Vector2(0,0)
 	
 	if facing == LEFT_FACING:

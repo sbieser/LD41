@@ -4,27 +4,43 @@ signal tama_died
 signal tama_update(happiness, hungriness)
 signal change_animation(animation)
 
-export (int) var animation_change = 10
-export (int) var animation_current = 0
 export (int) var tama_happiness = 0 		# max 30?
 export (int) var tama_hungriness = 0 		# max 30?
 export (int) var tama_rating = 0 			# max 30?
 export (int) var death_threshold = -5		# if tama_happiness and tama_hungriness reach this level, should
 											#	equate death
-										
-										
-										
+export (int) var max_meter_threshold = 40	# if fullness of happy or food reach 40, should not go over this amount
+export (float) var reduce_rate = 5
+export (float) var change_animation = 10
+export (int) var food_reduce_rate = 1
+export (int) var happy_reduce_rate = 1
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	emit_signal("change_animation", "egg")
+	emit_signal("tama_update", tama_happiness, tama_hungriness)
+	$ReduceTimer.wait_time = reduce_rate
+	$AnimationTimer.wait_time = change_animation
+	$AnimationTimer.start()
+
+func food(food):
+	tama_hungriness = tama_hungriness + food
+	if tama_hungriness > max_meter_threshold:
+		tama_hungriness = max_meter_threshold
+	emit_signal("tama_update", tama_happiness, tama_hungriness)
+	
+func happy(happy):
+	tama_happiness = tama_happiness + happy
+	if tama_happiness > max_meter_threshold:
+		tama_happiness = max_meter_threshold
+	emit_signal("tama_update", tama_happiness, tama_hungriness)
 
 func _on_ReduceTimer_timeout():
-	print("_on_ReduceTimer_timeout")
-	tama_happiness = tama_happiness - 1
+	tama_happiness = tama_happiness - happy_reduce_rate
 	if tama_happiness < death_threshold:
 		tama_happiness = death_threshold
-	tama_hungriness = tama_hungriness - 1
+	tama_hungriness = tama_hungriness - food_reduce_rate
 	if tama_hungriness < death_threshold:
 		tama_hungriness = death_threshold
 		
@@ -34,10 +50,6 @@ func _on_ReduceTimer_timeout():
 	else:
 		emit_signal("tama_update", tama_happiness, tama_hungriness)
 		
-
 func _on_AnimationTimer_timeout():
-	print("_on_AnimationTimer_timeout")
-	animation_current = animation_current + 1
-	if animation_current >= animation_change:
-		$AnimationTimer.stop()
-		emit_signal("change_animation", "baby_idle")
+	emit_signal("change_animation", "baby_idle")
+	$ReduceTimer.start()
