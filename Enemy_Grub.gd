@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var main = preload("res://Main.gd")
 
 signal hit
+signal enemy_died(enemy)
 signal changed_directions
 
 export (float) var SPEEDX = 1
@@ -42,10 +43,9 @@ func _physics_process(delta):
 	
 func remove_enemy():
 	queue_free()
-	#main.emit_signal("enemy_died")
+	emit_signal("enemy_died", self)
 	
 func hit_detected():
-	print('hit!!!')
 	hitpoint = hitpoint - 1
 	
 	if hitpoint < 1:

@@ -42,7 +42,7 @@ use_mipmaps = false
 use_filter = true
 font_data = ExtResource( 2 )
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )

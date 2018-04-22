@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Tama.gd" type="Script" id=1]
+
+[node name="Tama" type="Node"]
+
+script = ExtResource( 1 )
+animation_change = 10
+animation_current = 0
+tama_happiness = 0
+tama_hungriness = 0
+tama_rating = 0
+death_threshold = -5
+
+[node name="ReduceTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.5
+one_shot = false
+autostart = true
+
+[node name="AnimationTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="ReduceTimer" to="." method="_on_ReduceTimer_timeout"]
+
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]
+
+

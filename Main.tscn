@@ -6,12 +6,9 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
-tama_happiness = 0
-tama_hungriness = 0
-tama_health = 100
 food_count = 0
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
