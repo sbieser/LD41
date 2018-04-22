@@ -18,8 +18,8 @@ func _ready():
 	# Initialization here
 	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
 	self.connect( "game_over", self, "handle_game_over")
-	self.connect( "restart", self, "handle_restart_game" )
-	self.connect( "main_menu", self, "handle_main_menu" )
+	$HUD.connect( "restart", self, "handle_restart_game" )
+	$HUD.connect( "main_menu", self, "handle_main_menu" )
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
 
 func _on_Timer_timeout():
@@ -35,28 +35,19 @@ func _on_Timer_timeout():
 
 
 func _on_Player_button_pressed(button_type):
-	#pass # replace with function body
-	#print("_on_Player_button_pressed")
 	match button_type:
 		0:
-			#print("this is the food button")
 			if (food_count > 0):
 				food_count = food_count - 1
 				$HUD.update_score(food_count)
 				$Tama.food(1)
-			#food_count = food_count - 1
-			#$HUD.update_score(food_count)
 		1:
 			#print("this is the play button")
 			pass
-		2:
-			#print("this is the discipline button")
-			pass
 	
 func _on_SpawnTimer_timeout():
-	#
-	if all_flys.size() < 5:
-		randomize()
+	randomize()
+	if all_flys.size() < 5 && randi()%2 == 1:
 		var fly_instance = fly_scene.instance()
 		fly_instance.connect("enemy_died", self, "_on_enemy_dies")
 		var i = spawn_list[randi()%3]
@@ -66,17 +57,16 @@ func _on_SpawnTimer_timeout():
 
 func handle_restart_game():
 	print("handling retry")
-	$HUD.emit_signal("restart")
+	#$HUD.emit_signal("restart")
 	pass
 	
 func handle_main_menu():
 	print("handling main menu")
-	$HUD.emit_signal("main_menu")
+	#$HUD.emit_signal("main_menu")
 	pass
 	
 func handle_game_over():
 	$HUD.emit_signal("game_over")
-
 		
 func _on_enemy_dies(enemy):
 	$HitSound.play()
@@ -87,7 +77,6 @@ func _on_enemy_dies(enemy):
 	elif "Enemy_Grub" in enemy.get_name():
 		all_grubs.erase(enemy)
 		
-
 func _on_Tama_change_animation(animation):
 	$TamaAnimatedSprite.play(animation)
 
@@ -95,4 +84,4 @@ func _on_Tama_tama_update(happiness, hungriness):
 	$HUD.update_happy_hunger(happiness, hungriness)
 
 func _on_Tama_tama_died():
-	print("_on_Tama_tama_died")
+	emit_signal("game_over")

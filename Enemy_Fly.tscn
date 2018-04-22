@@ -85,7 +85,6 @@ shape = SubResource( 1 )
 position = Vector2( 2.05623, 15.6785 )
 frames = SubResource( 2 )
 animation = "move1"
-frame = 1
 playing = true
 
 [node name="HitBox2" type="CollisionShape2D" parent="." index="3"]
