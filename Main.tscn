@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://MainLevel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sounds/Hit_Hurt18.wav" type="AudioStream" id=6]
 
 [node name="Main" type="Node" index="0"]
 
@@ -96,10 +97,9 @@ wait_time = 1.0
 one_shot = false
 autostart = true
 
-[node name="HUD" parent="." index="7" instance=ExtResource( 5 )]
+[node name="Fly_spawn1" type="Position2D" parent="." index="7"]
 
-[node name="Fly_spawn1" type="Position2D" parent="." index="8"]
-
+editor/display_folded = true
 position = Vector2( 255.733, 152.031 )
 __meta__ = {
 "_edit_group_": true
@@ -112,12 +112,22 @@ wait_time = 5.0
 one_shot = false
 autostart = true
 
-[node name="Fly_spawn2" type="Position2D" parent="." index="9"]
+[node name="Fly_spawn2" type="Position2D" parent="." index="8"]
 
 position = Vector2( 66, -104 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="HUD" parent="." index="9" instance=ExtResource( 5 )]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="." index="10"]
+
+stream = ExtResource( 6 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 

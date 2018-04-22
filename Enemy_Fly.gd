@@ -4,7 +4,7 @@ const Player = preload("Player.gd")
 
 
 signal hit
-signal enemy_died
+signal enemy_died(enemy)
 
 export (int) var SPEED = 3
 var hitpoint = 1
@@ -32,7 +32,7 @@ func _process(delta):
 
 func remove_enemy():
 	queue_free()
-	emit_signal("enemy_died")
+	emit_signal("enemy_died", self)
 	
 func hit_detected():
 	hitpoint = hitpoint -1

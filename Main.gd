@@ -23,6 +23,7 @@ func _on_Timer_timeout():
 	#print("main::_on_Timer_timeout")
 	if all_grubs.size() < 5:
 		var grub_instance = grub_scene.instance()
+		grub_instance.connect("enemy_died", self, "_on_enemy_dies")
 		var i = spawn_list[randi()%3]
 		grub_instance.position = i.position
 		add_child(grub_instance)
@@ -38,21 +39,34 @@ func _on_Player_button_pressed(button_type):
 			food_count = food_count - 1
 			$HUD.update_score(food_count)
 		1:
-			print("this is the play button")
+			#print("this is the play button")
+			pass
 		2:
-			print("this is the discipline button")
+			#print("this is the discipline button")
+			pass
 			
 func _on_Player_hit():
+	pass
 	#this is for testing purposes
-	food_count = food_count + 1
-	$HUD.update_score(food_count)
+	#food_count = food_count + 1
+	#$HUD.update_score(food_count)
 	
 func _on_SpawnTimer_timeout():
 	if all_flys.size() < 5:
 		randomize()
 		var fly_instance = fly_scene.instance()
+		fly_instance.connect("enemy_died", self, "_on_enemy_dies")
 		var i = spawn_list[randi()%3]
-			
 		fly_instance.position = i.position
 		add_child(fly_instance)
 		all_flys.push_back(fly_instance)
+		
+func _on_enemy_dies(enemy):
+	$HitSound.play()
+	food_count = food_count + 1
+	$HUD.update_score(food_count)
+	if "Enemy_Fly" in enemy.get_name():
+		all_flys.erase(enemy)
+	elif "Enemy_Grub" in enemy.get_name():
+		all_grubs.erase(enemy)
+		

@@ -37,7 +37,7 @@ func change_direction():
 		facing = RIGHT_FACING
 
 func change_state(new_state):
-	print("change_state")
+	#print("change_state")
 	if new_state != state:
 		state = new_state
 		match state:
@@ -217,15 +217,24 @@ func _physics_process(delta):
 					change_state(IDLE)
 	#check attacking
 	if state == ATTACK:
+		#var bodies = $AttackArea.get_overlapping
+		var bodies = $AttackArea.get_overlapping_bodies()
+		for body in bodies:
+			if body.is_in_group("enemy") and not hit_bodies.has(body):
+				hit_bodies.append(body)
+				body.hit_detected()
+		#check areas
 		var areas = $AttackArea.get_overlapping_areas()
 		for area in areas:
-			if area.is_in_group("enemy") and not hit_enemies.has(area):
-				hit_enemies.append(area)
-				emit_signal("hit")
-				print("hit enemy")
-			elif area.is_in_group("button") and not hit_buttons.has(area):
+			#if area.is_in_group("enemy") and not hit_enemies.has(area):
+			#	print("hit enemy")
+			#	hit_enemies.append(area)
+			#	area.hit_detected()
+			#	emit_signal("hit")
+			if area.is_in_group("button") and not hit_buttons.has(area):
 				hit_buttons.append(area)
 				emit_signal("button_pressed", area.get_parent().type)
+		
 				
 				
 	#check if stunned			

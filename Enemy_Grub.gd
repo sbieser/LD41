@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 signal hit
-signal enemy_died
+signal enemy_died(enemy)
 signal changed_directions
 
 export (float) var SPEEDX = 1
@@ -36,7 +36,7 @@ func _physics_process(delta):
 	
 func remove_enemy():
 	queue_free()
-	emit_signal("enemy_died")
+	emit_signal("enemy_died", self)
 	
 func hit_detected():
 	hitpoint = hitpoint - 1
