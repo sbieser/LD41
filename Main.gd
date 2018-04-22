@@ -3,9 +3,6 @@ extends Node
 onready var grub_scene = preload("res://Enemy_Grub.tscn")
 onready var fly_scene = preload("res://Enemy_Fly.tscn")
 
-export (int) var tama_happiness = 0 		# should be out of 100
-export (int) var tama_hungriness = 0 		# should be out of 100
-export (int) var tama_health = 100 			# should be out of 100
 export (int) var food_count = 0				# The currency in which to feed the tama
 
 var all_grubs = []
@@ -32,12 +29,15 @@ func _on_Timer_timeout():
 
 func _on_Player_button_pressed(button_type):
 	#pass # replace with function body
-	print("_on_Player_button_pressed")
+	#print("_on_Player_button_pressed")
 	match button_type:
 		0:
 			#print("this is the food button")
-			food_count = food_count - 1
-			$HUD.update_score(food_count)
+			if (food_count > 0):
+				food_count = food_count - 1
+				$HUD.update_score(food_count)
+			#food_count = food_count - 1
+			#$HUD.update_score(food_count)
 		1:
 			#print("this is the play button")
 			pass
@@ -70,3 +70,6 @@ func _on_enemy_dies(enemy):
 	elif "Enemy_Grub" in enemy.get_name():
 		all_grubs.erase(enemy)
 		
+
+func _on_Tama_change_animation(animation):
+	$TamaAnimatedSprite.play(animation)
