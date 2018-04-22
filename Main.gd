@@ -33,3 +33,10 @@ func _on_Player_button_pressed(button_type):
 			print("this is the play button")
 		2:
 			print("this is the discipline button")
+
+
+func _on_Player_hit():
+	#this is for testing purposes
+	food_count = food_count + 1
+	$HUD.update_score(food_count)
+	

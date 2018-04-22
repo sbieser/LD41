@@ -223,6 +223,7 @@ func _physics_process(delta):
 		for area in areas:
 			if area.is_in_group("enemy") and not hit_enemies.has(area):
 				hit_enemies.append(area)
+				emit_signal("hit")
 				print("hit enemy")
 			elif area.is_in_group("button") and not hit_buttons.has(area):
 				#print(area.get_parent().type)
