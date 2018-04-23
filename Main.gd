@@ -15,6 +15,7 @@ var coins = []
 var spawn_list
 var coin_spawn_list
 var total = 0
+var is_game_playing = false
 
 signal game_over
 
@@ -28,14 +29,13 @@ func _ready():
 	$HUD.connect( "restart", self, "_handle_restart_game" )
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
 	$HUD.connect( "start_game", self, "_handle_restart_game")
-	#$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
 	$BackgroundMusic.play()	
-
 	
-	#$HUD.emit_signal("restart")
+func _process(delta):
+	if is_game_playing:
+		$HUD.update_timer(int($PlayTimer.time_left))
 	
-
 func _on_Timer_timeout():
 	#pass # replace with function body
 	#print("main::_on_Timer_timeout")
@@ -57,7 +57,6 @@ func _on_Player_button_pressed(button_type):
 				$HUD.update_score(food_count)
 				$Tama.food(1)
 		1:
-			#_handle_restart_game()
 			if (coin_count > 0):
 				coin_count = coin_count - 1
 				total = total + coin_value
@@ -76,8 +75,6 @@ func _on_SpawnTimer_timeout():
 		all_flys.push_back(fly_instance)
 
 func _handle_restart_game():
-	
-	
 	$PlayTimer.start()
 	
 	var _coins = get_tree().get_nodes_in_group("coin")
@@ -100,6 +97,7 @@ func _handle_restart_game():
 	$Tama.emit_signal("restart")
 	$FoodBtn.emit_signal("restart")
 	$PlayBtn.emit_signal("restart")
+	is_game_playing = true
 	
 func _handle_main_menu():
 	get_tree().quit()
@@ -111,6 +109,7 @@ func _handle_game_over():
 	$Coin_timer.stop()
 	$SpawnGrub_1/SpawnTimer.stop()
 	$Fly_spawn1/SpawnTimer.stop()
+	is_game_playing = false
 	
 	$HUD.emit_signal("game_over", total)
 	$FoodBtn.emit_signal("game_over")
