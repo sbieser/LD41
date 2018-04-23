@@ -94,6 +94,12 @@ func _handle_end_minigame():
 
 func _on_Tama_tama_update(happiness, hungriness):
 	$HUD.update_happy_hunger(happiness, hungriness)
+	if happiness < 0:
+		$TamaAnimatedSprite.play("baby_sad")
+	elif hungriness < 0:
+		$TamaAnimatedSprite.play("baby_hungry")
+	else:
+		$TamaAnimatedSprite.play("baby_idle")
 
 func _on_Tama_tama_died():
 	emit_signal("game_over")
