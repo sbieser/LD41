@@ -88,6 +88,10 @@ func _handle_restart_game():
 	all_grubs.clear()
 	all_flys.clear()
 	coins.clear()
+	
+	total = 0
+	food_count = 0
+	coin_count = 0
 
 	$Coin_timer.start()
 	$SpawnGrub_1/SpawnTimer.start()
