@@ -5,13 +5,16 @@ onready var fly_scene = preload("res://Enemy_Fly.tscn")
 onready var coin_scene = preload("res://Coin.tscn")
 
 export (int) var food_count = 0				# The currency in which to feed the tama
+export (int) var food_value = 1
 export (int) var coin_count = 0				# The currency in which to play the tama
+export (int) var coin_value = 1
 
 var all_grubs = []
 var all_flys = []
 var coins = []
 var spawn_list
 var coin_spawn_list
+var total = 0
 
 signal game_over
 
@@ -50,12 +53,14 @@ func _on_Player_button_pressed(button_type):
 		0:
 			if (food_count > 0):
 				food_count = food_count - 1
+				total = total + food_value
 				$HUD.update_score(food_count)
 				$Tama.food(1)
 		1:
 			#_handle_restart_game()
 			if (coin_count > 0):
 				coin_count = coin_count - 1
+				total = total + coin_value
 				$HUD.update_coin(coin_count)
 				$Tama.happy(1)
 			
@@ -113,7 +118,8 @@ func _handle_game_over():
 		
 func _on_enemy_dies(enemy):
 	$HitSound.play()
-	food_count = food_count + 3
+	food_count = food_count + food_value
+	total = total + food_value
 	$HUD.update_score(food_count)
 	if "Enemy_Fly" in enemy.get_name():
 		all_flys.erase(enemy)
@@ -139,7 +145,8 @@ func _on_Tama_tama_died():
 	emit_signal("game_over")
 
 func remove_coin(coin):
-	coin_count = coin_count + 1
+	total = total + coin_value
+	coin_count = coin_count + coin_value
 	$HUD.update_coin(coin_count)
 	if coin in coins:
 		coins.erase(coin)
