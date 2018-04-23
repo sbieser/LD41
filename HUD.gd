@@ -32,7 +32,7 @@ func update_coin(coin):
 	$CoinCount.text = str(coin)
 
 func update_happy_hunger(happiness,hungriness):
-	print("update_happy_hunger " + str(happiness) + ":" + str(hungriness))
+	#print("update_happy_hunger " + str(happiness) + ":" + str(hungriness))
 	#update the happy meter
 	if happiness >= 3:
 		$HappyLabel/HappyFull1.visible = true

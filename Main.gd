@@ -26,6 +26,7 @@ func _ready():
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
 	#$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
+	
 
 func _on_Timer_timeout():
 	#pass # replace with function body
@@ -102,6 +103,7 @@ func remove_coin(coin):
 	$HUD.update_coin(coin_count)
 	if coin in coins:
 		coins.erase(coin)
+		coin.queue_free()
 	
 func _on_Coin_Timer_timeout():
 	randomize()
@@ -111,8 +113,8 @@ func _on_Coin_Timer_timeout():
 		var i = coin_spawn_list[randi()%coin_spawn_list.size()]
 		coin_instance.position = i.position
 		add_child(coin_instance)
+		print(coin_instance)
 		coins.push_back(coin_instance)
-
 
 func _on_Player_coin_collected(coin):
 	remove_coin(coin)

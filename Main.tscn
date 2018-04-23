@@ -50,7 +50,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 food_count = 0
@@ -212,7 +212,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="coin_swawn2" type="Position2D" parent="CoinContainer" index="1"]
 
-position = Vector2( 436, -236 )
+position = Vector2( 273.208, 226.752 )
 
 [node name="Coin_timer" type="Timer" parent="." index="14"]
 
