@@ -1,6 +1,7 @@
 [gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
+<<<<<<< HEAD
 [ext_resource path="res://textures/player_anims/baby_hungry1.png" type="Texture" id=2]
 [ext_resource path="res://textures/player_anims/baby_hungry2.png" type="Texture" id=3]
 [ext_resource path="res://textures/player_anims/baby_hungry3.png" type="Texture" id=4]
@@ -18,6 +19,25 @@
 [ext_resource path="res://textures/player_anims/baby_idle2.png" type="Texture" id=16]
 [ext_resource path="res://textures/player_anims/baby_idle3.png" type="Texture" id=17]
 [ext_resource path="res://textures/player_anims/baby_idle4.png" type="Texture" id=18]
+=======
+[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
+[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/baby_idle1.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/baby_idle2.png" type="Texture" id=11]
+[ext_resource path="res://textures/player_anims/baby_idle3.png" type="Texture" id=12]
+[ext_resource path="res://textures/player_anims/baby_idle4.png" type="Texture" id=13]
+[ext_resource path="res://textures/player_anims/baby_hungry1.png" type="Texture" id=14]
+[ext_resource path="res://textures/player_anims/baby_hungry2.png" type="Texture" id=15]
+[ext_resource path="res://textures/player_anims/baby_hungry3.png" type="Texture" id=16]
+[ext_resource path="res://textures/player_anims/baby_hungry4.png" type="Texture" id=17]
+[ext_resource path="res://textures/player_anims/baby_hungry5.png" type="Texture" id=18]
+>>>>>>> c97c7babcd3a3e7f76dd94c17832767dbb41a8bb
 [ext_resource path="res://textures/player_anims/creature_bg.png" type="Texture" id=19]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=20]
 [ext_resource path="res://MainLevel.tscn" type="PackedScene" id=21]
@@ -35,19 +55,25 @@ animations = [ {
 "name": "baby_hungry",
 "speed": 5.0
 }, {
+<<<<<<< HEAD
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "egg",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+=======
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "baby_sad",
+>>>>>>> c97c7babcd3a3e7f76dd94c17832767dbb41a8bb
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "baby_idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "baby_hungry",
 "speed": 5.0
 } ]
 
@@ -160,7 +186,7 @@ autostart = false
 [node name="Fly_spawn1" type="Position2D" parent="." index="8"]
 
 editor/display_folded = true
-position = Vector2( 255.733, 152.031 )
+position = Vector2( 443.733, -393.969 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -193,6 +219,7 @@ bus = "Master"
 
 [node name="CoinContainer" type="Container" parent="." index="13"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -229,13 +256,15 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." index="15"]
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="." index="15"]
 
 stream = ExtResource( 26 )
-volume_db = -2.79
+volume_db = -8.39
 autoplay = false
-mix_target = 0
+max_distance = 2000.0
+attenuation = 1.0
 bus = "Master"
+area_mask = 1
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
