@@ -59,8 +59,8 @@ func _on_AnimationTimer_timeout():
 func _on_restart_game():
 	tama_happiness = 0
 	tama_hungriness = 0
-	emit_signal("change_animation", "egg")
 	emit_signal("tama_update", tama_happiness, tama_hungriness)
+	emit_signal("change_animation", "egg")
 	$ReduceTimer.wait_time = reduce_rate
 	$AnimationTimer.wait_time = change_animation
 	$AnimationTimer.start()
