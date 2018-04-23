@@ -1,23 +1,23 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
-[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=3]
-[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=4]
-[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=5]
-[ext_resource path="res://textures/player_anims/baby_hungry1.png" type="Texture" id=6]
-[ext_resource path="res://textures/player_anims/baby_hungry2.png" type="Texture" id=7]
-[ext_resource path="res://textures/player_anims/baby_hungry3.png" type="Texture" id=8]
-[ext_resource path="res://textures/player_anims/baby_hungry4.png" type="Texture" id=9]
-[ext_resource path="res://textures/player_anims/baby_hungry5.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/baby_hungry1.png" type="Texture" id=2]
+[ext_resource path="res://textures/player_anims/baby_hungry2.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/baby_hungry3.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/baby_hungry4.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/baby_hungry5.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=10]
 [ext_resource path="res://textures/player_anims/baby_idle1.png" type="Texture" id=11]
 [ext_resource path="res://textures/player_anims/baby_idle2.png" type="Texture" id=12]
 [ext_resource path="res://textures/player_anims/baby_idle3.png" type="Texture" id=13]
 [ext_resource path="res://textures/player_anims/baby_idle4.png" type="Texture" id=14]
-[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=15]
-[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=16]
-[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=17]
-[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=18]
+[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=15]
+[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=16]
+[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=17]
+[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=18]
 [ext_resource path="res://textures/player_anims/creature_bg.png" type="Texture" id=19]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=20]
 [ext_resource path="res://MainLevel.tscn" type="PackedScene" id=21]
@@ -25,18 +25,19 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sounds/Hit_Hurt18.wav" type="AudioStream" id=24]
 [ext_resource path="res://Tama.tscn" type="PackedScene" id=25]
+[ext_resource path="res://music/bensound-moose.ogg" type="AudioStream" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "egg",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "baby_hungry",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "baby_sad",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
@@ -46,11 +47,11 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
-"name": "baby_sad",
+"name": "egg",
 "speed": 5.0
 } ]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 food_count = 0
@@ -81,7 +82,6 @@ position = Vector2( 316.027, -43.9832 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "egg"
-frame = 2
 playing = true
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -108,6 +108,7 @@ tile_data = PoolIntArray( -983040, 2, 0, -983039, 2, 0, -983038, 2, 0, -983037, 
 
 [node name="Player" parent="." index="6" instance=ExtResource( 22 )]
 
+editor/display_folded = true
 position = Vector2( 330.269, 213.724 )
 jump_speed = -320
 
@@ -220,6 +221,14 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." index="15"]
+
+stream = ExtResource( 26 )
+volume_db = -8.84
+autoplay = true
+mix_target = 0
+bus = "Master"
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 

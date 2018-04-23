@@ -38,6 +38,8 @@ func _ready():
 	connect("restart", self, "_restart_player")
 	connect("game_over", self, "_on_game_over")
 	
+	
+	
 func _restart_player():
 	self.visible = true
 	self.position = initial_position

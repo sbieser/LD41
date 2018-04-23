@@ -26,6 +26,8 @@ func _ready():
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
 	#$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
+	$BackgroundMusic.play()	
+
 	
 
 func _on_Timer_timeout():
