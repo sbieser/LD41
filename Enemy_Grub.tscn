@@ -28,12 +28,13 @@ animations = [ {
 ]]
 
 position = Vector2( -0.0769463, 0.92334 )
+scale = Vector2( 0.8, 0.8 )
 input_pickable = false
 collision_layer = 8
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 SPEEDX = 1
 
 [node name="Left_side" type="Area2D" parent="." index="0" groups=[
@@ -97,7 +98,6 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 0.0261841, 1.25892 )
 frames = SubResource( 3 )
 animation = "move1"
-frame = 1
 playing = true
 
 [connection signal="body_entered" from="Left_side" to="." method="_on_Left_side_body_entered"]

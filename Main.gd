@@ -22,7 +22,7 @@ signal game_over
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
+	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1, $Enemy_spawn4]
 	coin_spawn_list = $CoinContainer.get_children()
 	print(coin_spawn_list)
 	self.connect( "game_over", self, "_handle_game_over" )
