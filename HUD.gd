@@ -111,7 +111,7 @@ func start_game():
 	$HungerLabel.visible = true
 	$HappyLabel.visible = true
 	$BorderRect.visible = false
-	$StartLabel.visible = false
+	$StartColorRect.visible = false
 	$TimerBorder.visible = true
 	game = false
 	

@@ -277,31 +277,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label4" type="Label" parent="." index="17"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 249.0
-margin_top = 99.0
-margin_right = 431.0
-margin_bottom = 116.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.184314, 0.384314, 0.184314, 1 )
-text = "z -> Jump x -> Slash"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Label2" type="Label" parent="." index="18"]
+[node name="Label2" type="Label" parent="." index="17"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -325,7 +301,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Label3" type="Label" parent="." index="19"]
+[node name="Label3" type="Label" parent="." index="18"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -349,14 +325,14 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="PlayTimer" type="Timer" parent="." index="20"]
+[node name="PlayTimer" type="Timer" parent="." index="19"]
 
 process_mode = 1
 wait_time = 121.0
 one_shot = true
 autostart = false
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." index="21"]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." index="20"]
 
 stream = ExtResource( 28 )
 volume_db = -35.0
