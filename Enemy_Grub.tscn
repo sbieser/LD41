@@ -23,7 +23,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[node name="Enemy_Grub" type="KinematicBody2D" index="0" groups=[
+[node name="Enemy_Grub" type="KinematicBody2D" groups=[
 "enemy",
 ]]
 
@@ -55,8 +55,8 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_side" index="0"]
 
-position = Vector2( -31.1641, 7.02552 )
-scale = Vector2( 0.17794, 0.983612 )
+position = Vector2( -31.1641, 8.88894 )
+scale = Vector2( 0.17794, 0.840271 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -64,7 +64,6 @@ _sections_unfolded = [ "Transform" ]
 "enemy",
 ]]
 
-editor/display_folded = true
 position = Vector2( 0.905182, 1.37933 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -79,8 +78,8 @@ __meta__ = {
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Right_side" index="0"]
 
-position = Vector2( 30.4575, 6.19018 )
-scale = Vector2( 0.103791, 0.998443 )
+position = Vector2( 30.4575, 8.31066 )
+scale = Vector2( 0.103791, 0.835329 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -88,8 +87,8 @@ _sections_unfolded = [ "Transform" ]
 "enemy",
 ]]
 
-position = Vector2( 0.198606, 7.56954 )
-scale = Vector2( 3.10406, 0.998441 )
+position = Vector2( 0.198606, 9.62573 )
+scale = Vector2( 3.10406, 0.840272 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
