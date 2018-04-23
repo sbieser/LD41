@@ -127,18 +127,23 @@ func _on_enemy_dies(enemy):
 		all_grubs.erase(enemy)
 		
 func _on_Tama_change_animation(animation):
+	print("_asdasdasdasdsdon_Tama_change_animation")
 	$TamaAnimatedSprite.play(animation)
 	
 func _handle_end_minigame():
 	pass
 
 func _on_Tama_tama_update(happiness, hungriness):
+	print("_on_Tama_tama_update " + str(happiness) + " : " + str(hungriness))
 	$HUD.update_happy_hunger(happiness, hungriness)
 	if happiness < 0:
+		print("_on_Tama_tama_update 1")
 		$TamaAnimatedSprite.play("baby_sad")
 	elif hungriness < 0:
+		print("_on_Tama_tama_update 2")
 		$TamaAnimatedSprite.play("baby_hungry")
 	else:
+		print("_on_Tama_tama_update 3")
 		$TamaAnimatedSprite.play("baby_idle")
 
 func _on_Tama_tama_died():

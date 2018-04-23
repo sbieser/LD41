@@ -33,7 +33,9 @@ func happy(happy):
 		tama_happiness = max_meter_threshold
 	emit_signal("tama_update", tama_happiness, tama_hungriness)
 
-func _on_ReduceTimer_timeout():
+func _on_ReduceTimer_timeout(): 
+	#print("_on_ReduceTimer_timeout " + str(tama_happiness) + " : " + str(tama_hungriness))
+	
 	tama_happiness = tama_happiness - happy_reduce_rate
 	if tama_happiness < death_threshold:
 		tama_happiness = death_threshold
@@ -51,6 +53,7 @@ func _on_ReduceTimer_timeout():
 func _on_AnimationTimer_timeout():
 	emit_signal("change_animation", "baby_idle")
 	$ReduceTimer.start()
+	$AnimationTimer.stop()
 	
 func _on_restart_game():
 	tama_happiness = 0
@@ -60,4 +63,4 @@ func _on_restart_game():
 	$ReduceTimer.wait_time = reduce_rate
 	$AnimationTimer.wait_time = change_animation
 	$AnimationTimer.start()
-	$ReduceTimer.start()
+	#$ReduceTimer.start()

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Tama.gd" type="Script" id=1]
 
-[node name="Tama" type="Node"]
+[node name="Tama" type="Node" index="0"]
 
 script = ExtResource( 1 )
 tama_happiness = 0
@@ -26,7 +26,7 @@ autostart = false
 
 process_mode = 1
 wait_time = 1.0
-one_shot = false
+one_shot = true
 autostart = false
 
 [connection signal="timeout" from="ReduceTimer" to="." method="_on_ReduceTimer_timeout"]
