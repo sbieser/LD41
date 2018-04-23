@@ -73,6 +73,7 @@ func change_state(new_state):
 			ATTACK:
 				new_anim = "new_attack"
 				$AttackArea.visible = true
+				$SlashSound.play()
 			JUMP:
 				new_anim = "jump"
 	
