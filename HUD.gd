@@ -88,6 +88,8 @@ func main_menu():
 	$FoodCount.visible = false
 	$HungerLabel.visible = false
 	$HappyLabel.visible = false
+	$BorderRect.visible = false
+	$MenuRect.visible = false
 	game = false
 	
 func start_game():
@@ -101,6 +103,8 @@ func start_game():
 	$FoodCount.visible = true
 	$HungerLabel.visible = true
 	$HappyLabel.visible = true
+	$BorderRect.visible = false
+	$MenuRect.visible = false
 	game = false
 	
 func handle_game_over():
@@ -111,8 +115,10 @@ func handle_game_over():
 	$FoodCount.visible = false
 	$HungerLabel.visible = false
 	$HappyLabel.visible = false
-	$QuitLabel.set("custom_colors/font_color", "FFFFFF")
-	$RetryLabel.set("custom_colors/font_color", "333333")
+	$BorderRect.visible = true
+	$MenuRect.visible = true
+	$QuitLabel.set("custom_colors/font_color", "306230")
+	$RetryLabel.set("custom_colors/font_color", "FFFFFF")
 	game = true
 
 func game_over_input():
@@ -121,15 +127,15 @@ func game_over_input():
 	var enter = Input.is_action_pressed("ui_accept")
 	
 	if right:
-		$QuitLabel.set("custom_colors/font_color", "333333")
-		$RetryLabel.set("custom_colors/font_color", "FFFFFF")
-	elif left:
 		$QuitLabel.set("custom_colors/font_color", "FFFFFF")
-		$RetryLabel.set("custom_colors/font_color", "333333")
+		$RetryLabel.set("custom_colors/font_color", "306230")
+	elif left:
+		$QuitLabel.set("custom_colors/font_color", "306230")
+		$RetryLabel.set("custom_colors/font_color", "FFFFFF")
 	elif enter:
-		if $QuitLabel.get("custom_colors/font_color") == Color("333333"):
+		if $QuitLabel.get("custom_colors/font_color") == Color("FFFFFF"):
 			emit_signal("main_menu")
-		elif $RetryLabel.get("custom_colors/font_color") == Color("333333"):
+		elif $RetryLabel.get("custom_colors/font_color") == Color("FFFFFF"):
 			emit_signal("restart")
 		game = false
 		pass

@@ -21,7 +21,7 @@ func _ready():
 	spawn_list = [$Fly_spawn1, $Fly_spawn2, $SpawnGrub_1]
 	coin_spawn_list = $CoinContainer.get_children()
 	print(coin_spawn_list)
-	self.connect( "game_over", self, "_handle_game_over")
+	self.connect( "game_over", self, "_handle_game_over" )
 	$HUD.connect( "restart", self, "_handle_restart_game" )
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
 	#$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
@@ -78,19 +78,6 @@ func _handle_restart_game():
 	all_grubs.clear()
 	all_flys.clear()
 	coins.clear()
-	
-#	for g in all_grubs:
-#		g.queue_free()
-#		all_grubs.erase(g)
-#		#g.remove_enemy(false)
-#
-#	for f in all_flys:
-#		all_flys.erase(f)
-#		f.queue_free()
-#
-#	for c in coins:
-#		c.queue_free()
-#		coins.erase(c)
 
 	$Coin_timer.start()
 	$SpawnGrub_1/SpawnTimer.start()
@@ -98,7 +85,8 @@ func _handle_restart_game():
 		
 	$Player.emit_signal("restart")
 	$Tama.emit_signal("restart")
-	#$HUD.emit_signal("restart")
+	$FoodBtn.emit_signal("restart")
+	$PlayBtn.emit_signal("restart")
 	pass
 	
 func _handle_main_menu():
@@ -110,7 +98,12 @@ func _handle_game_over():
 	$Coin_timer.stop()
 	$SpawnGrub_1/SpawnTimer.stop()
 	$Fly_spawn1/SpawnTimer.stop()
+	
 	$HUD.emit_signal("game_over")
+	$FoodBtn.emit_signal("game_over")
+	$PlayBtn.emit_signal("game_over")
+	$Player.emit_signal("game_over")
+	
 		
 func _on_enemy_dies(enemy):
 	$HitSound.play()

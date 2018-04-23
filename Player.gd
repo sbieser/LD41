@@ -4,6 +4,7 @@ extends KinematicBody2D
 signal hit
 signal button_pressed(button_type)
 signal restart
+signal game_over
 signal coin_collected(coin)
 
 export (int) var jump_speed = -200
@@ -20,6 +21,7 @@ var state
 var anim
 var new_anim
 var initial_position
+var game_over = false
 
 var hit_bodies = [] #array of bodies hit by the current attack
 var hit_enemies = [] #array of enemies hit by the current attack
@@ -33,13 +35,19 @@ func _ready():
 	$AttackArea.visible = false
 	change_state(IDLE)
 	
-	self.connect("restart", self, "_restart_player");
+	connect("restart", self, "_restart_player")
+	connect("game_over", self, "_on_game_over")
 	
 func _restart_player():
 	self.visible = true
 	self.position = initial_position
 	$AttackArea.visible = false
 	change_state(IDLE)
+	game_over = false
+
+func _on_game_over():
+	game_over = true
+	velocity.x = 0
 
 func change_direction():
 	if velocity.x < 0:
@@ -202,13 +210,14 @@ func handle_input():
 			pass
 	
 func _process(delta):
-	handle_input()
-	
-	if new_anim != anim:
-		anim = new_anim
-		$AnimatedSprite.play(anim)
-		if anim == "new_attack":
-			get_node("AttackArea/AttackTimer").start()
+	if(!game_over):
+		handle_input()
+		
+		if new_anim != anim:
+			anim = new_anim
+			$AnimatedSprite.play(anim)
+			if anim == "new_attack":
+				get_node("AttackArea/AttackTimer").start()
 		
 func _physics_process(delta):
 	velocity.y += gravity * delta
