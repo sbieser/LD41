@@ -41,15 +41,16 @@ func _physics_process(delta):
 	velocity.y += gravity * delta	
 	velocity = move_and_slide(velocity, Vector2(0,-1))
 	
-func remove_enemy():
+func remove_enemy(died_by_hit):
 	queue_free()
-	emit_signal("enemy_died", self)
+	if died_by_hit:
+		emit_signal("enemy_died", self)
 	
 func hit_detected():
 	hitpoint = hitpoint - 1
 	
 	if hitpoint < 1:
-		remove_enemy()
+		remove_enemy(true)
 
 func move_directions():
 	if direction == "right":

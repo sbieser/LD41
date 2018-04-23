@@ -1,6 +1,7 @@
 extends Node
 
 signal tama_died
+signal restart
 signal tama_update(happiness, hungriness)
 signal change_animation(animation)
 
@@ -23,6 +24,8 @@ func _ready():
 	$ReduceTimer.wait_time = reduce_rate
 	$AnimationTimer.wait_time = change_animation
 	$AnimationTimer.start()
+	
+	connect("restart", self, "_on_restart_game")
 
 func food(food):
 	tama_hungriness = tama_hungriness + food
@@ -53,3 +56,12 @@ func _on_ReduceTimer_timeout():
 func _on_AnimationTimer_timeout():
 	emit_signal("change_animation", "baby_idle")
 	$ReduceTimer.start()
+	
+func _on_restart_game():
+	tama_happiness = 0
+	tama_hungriness = 0
+	emit_signal("change_animation", "egg")
+	emit_signal("tama_update", tama_happiness, tama_hungriness)
+	$ReduceTimer.wait_time = reduce_rate
+	$AnimationTimer.wait_time = change_animation
+	$AnimationTimer.start()

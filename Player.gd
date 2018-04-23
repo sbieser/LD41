@@ -3,6 +3,7 @@ extends KinematicBody2D
 #if anything outside of this class needs to know if the player was hit, it could connect to this
 signal hit
 signal button_pressed(button_type)
+signal restart
 
 #export (int) var walk_speed
 
@@ -19,6 +20,7 @@ var velocity = Vector2()
 var state
 var anim
 var new_anim
+var initial_position
 
 var hit_bodies = [] #array of bodies hit by the current attack
 var hit_enemies = [] #array of enemies hit by the current attack
@@ -27,6 +29,15 @@ var hit_buttons = [] #array of buttons hit by the current attack
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
+	initial_position = self.position
+	$AttackArea.visible = false
+	change_state(IDLE)
+	
+	self.connect("restart", self, "_restart_player");
+	
+func _restart_player():
+	self.visible = true
+	self.position = initial_position
 	$AttackArea.visible = false
 	change_state(IDLE)
 

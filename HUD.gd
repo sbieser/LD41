@@ -19,7 +19,7 @@ func _ready():
 	self.connect("game_over", self, "handle_game_over" )
 	self.connect("restart", self, "start_game")
 	self.connect("main_menu", self, "main_menu")
-	
+
 
 func _process(delta):
 	if game:
@@ -90,6 +90,7 @@ func main_menu():
 func start_game():
 	print("triggered?")
 	update_score(0)
+	update_happy_hunger(0, 0)
 	$QuitLabel.visible = false
 	$RetryLabel.visible = false
 	$GameOverLabel.visible = false

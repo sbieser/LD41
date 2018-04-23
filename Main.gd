@@ -61,7 +61,22 @@ func _on_SpawnTimer_timeout():
 		all_flys.push_back(fly_instance)
 
 func _handle_restart_game():
-	print("handling retry")
+	for g in all_grubs:
+		g.remove_enemy(false)
+		all_grubs.erase(g)
+	
+	for f in all_flys:
+		all_flys.erase(f)
+	
+	for c in coins:
+		coins.erase(c)
+		
+	$Coin_timer.start()
+	$SpawnGrub_1/SpawnTimer.start()
+	$Fly_spawn1/SpawnTimer.start()
+		
+	$Player.emit_signal("restart")
+	$Tama.emit_signal("restart")
 	#$HUD.emit_signal("restart")
 	pass
 	
@@ -71,6 +86,9 @@ func _handle_main_menu():
 	pass
 	
 func _handle_game_over():
+	$Coin_timer.stop()
+	$SpawnGrub_1/SpawnTimer.stop()
+	$Fly_spawn1/SpawnTimer.stop()
 	$HUD.emit_signal("game_over")
 		
 func _on_enemy_dies(enemy):
