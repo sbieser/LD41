@@ -102,9 +102,10 @@ func _handle_restart_game():
 	pass
 	
 func _handle_main_menu():
-	print("handling main menu")
+	get_tree().quit()
+	#print("handling main menu")
 	#$HUD.emit_signal("main_menu")
-	pass
+	#pass
 	
 func _handle_game_over():
 	$Coin_timer.stop()
