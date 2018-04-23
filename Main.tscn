@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sounds/Hit_Hurt18.wav" type="AudioStream" id=24]
 [ext_resource path="res://Tama.tscn" type="PackedScene" id=25]
+[ext_resource path="res://music/bensound-moose.ogg" type="AudioStream" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -50,7 +51,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
 food_count = 0
@@ -81,8 +82,7 @@ position = Vector2( 316.027, -43.9832 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "egg"
-frame = 1
-playing = true
+frame = 3
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
@@ -223,6 +223,16 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="." index="15"]
+
+stream = ExtResource( 26 )
+volume_db = -8.39
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
