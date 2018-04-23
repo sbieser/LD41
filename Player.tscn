@@ -5,11 +5,11 @@
 [ext_resource path="res://textures/player_anims/player_walk2.png" type="Texture" id=3]
 [ext_resource path="res://textures/player_anims/player_walk3.png" type="Texture" id=4]
 [ext_resource path="res://textures/player_anims/player_walk4.png" type="Texture" id=5]
-[ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=6]
-[ext_resource path="res://textures/player_anims/player_jump.png" type="Texture" id=7]
-[ext_resource path="res://textures/player_anims/player_attack_new1.png" type="Texture" id=8]
-[ext_resource path="res://textures/player_anims/player_attack_new2.png" type="Texture" id=9]
-[ext_resource path="res://textures/player_anims/player_attack_new3.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/player_attack_new1.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/player_attack_new2.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/player_attack_new3.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/player_jump.png" type="Texture" id=10]
 [ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=11]
 [ext_resource path="res://textures/player_anims/player_idle2.png" type="Texture" id=12]
 [ext_resource path="res://textures/player_anims/player_idle3.png" type="Texture" id=13]
@@ -35,20 +35,20 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "new_attack",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "duck",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "new_attack",
-"speed": 30.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,

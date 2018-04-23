@@ -24,8 +24,11 @@ func _ready():
 	self.connect( "game_over", self, "_handle_game_over" )
 	$HUD.connect( "restart", self, "_handle_restart_game" )
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
+	$HUD.connect( "start_game", self, "_handle_restart_game")
 	#$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
+	
+	#$HUD.emit_signal("restart")
 	
 
 func _on_Timer_timeout():

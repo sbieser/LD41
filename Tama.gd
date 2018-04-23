@@ -19,11 +19,11 @@ export (int) var happy_reduce_rate = 1
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	emit_signal("change_animation", "egg")
-	emit_signal("tama_update", tama_happiness, tama_hungriness)
-	$ReduceTimer.wait_time = reduce_rate
-	$AnimationTimer.wait_time = change_animation
-	$AnimationTimer.start()
+	#emit_signal("change_animation", "egg")
+	#emit_signal("tama_update", tama_happiness, tama_hungriness)
+	#$ReduceTimer.wait_time = reduce_rate
+	#$AnimationTimer.wait_time = change_animation
+	#$AnimationTimer.start()
 	
 	connect("restart", self, "_on_restart_game")
 
@@ -49,6 +49,7 @@ func _on_ReduceTimer_timeout():
 		
 	if tama_happiness == death_threshold or tama_hungriness == death_threshold:
 		$ReduceTimer.stop()
+		$AnimationTimer.stop()
 		emit_signal("tama_died")
 	else:
 		emit_signal("tama_update", tama_happiness, tama_hungriness)
@@ -65,3 +66,4 @@ func _on_restart_game():
 	$ReduceTimer.wait_time = reduce_rate
 	$AnimationTimer.wait_time = change_animation
 	$AnimationTimer.start()
+	$ReduceTimer.start()

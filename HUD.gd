@@ -5,8 +5,10 @@ onready var main = preload("res://Main.gd")
 signal game_over
 signal main_menu
 signal restart
+signal start_game
  
 var game = false
+var start = false
 
 # class member variables go here, for example:
 # var a = 2
@@ -19,10 +21,13 @@ func _ready():
 	self.connect("game_over", self, "handle_game_over" )
 	self.connect("restart", self, "start_game")
 	self.connect("main_menu", self, "main_menu")
+	self.connect("start_game", self, "start_game")
 
 
 func _process(delta):
-	if game:
+	if !start:
+		start_game_input()
+	elif game:
 		game_over_input()
 
 func update_score(score):
@@ -93,7 +98,6 @@ func main_menu():
 	game = false
 	
 func start_game():
-	print("triggered?")
 	update_score(0)
 	update_happy_hunger(0, 0)
 	$QuitLabel.visible = false
@@ -105,6 +109,7 @@ func start_game():
 	$HappyLabel.visible = true
 	$BorderRect.visible = false
 	$MenuRect.visible = false
+	$StartLabel.visible = false
 	game = false
 	
 func handle_game_over():
@@ -120,6 +125,12 @@ func handle_game_over():
 	$QuitLabel.set("custom_colors/font_color", "306230")
 	$RetryLabel.set("custom_colors/font_color", "FFFFFF")
 	game = true
+	
+func start_game_input():
+	var enter = Input.is_action_pressed("ui_accept")
+	if enter:
+		start = true
+		emit_signal("restart")
 
 func game_over_input():
 	var right = Input.is_action_pressed("ui_right")

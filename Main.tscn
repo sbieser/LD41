@@ -81,7 +81,7 @@ position = Vector2( 316.027, -43.9832 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "egg"
-frame = 2
+frame = 1
 playing = true
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -108,6 +108,8 @@ tile_data = PoolIntArray( -983040, 2, 0, -983039, 2, 0, -983038, 2, 0, -983037, 
 
 [node name="Player" parent="." index="6" instance=ExtResource( 22 )]
 
+editor/display_folded = true
+visible = false
 position = Vector2( 330.269, 213.724 )
 jump_speed = -320
 
@@ -149,9 +151,9 @@ __meta__ = {
 [node name="SpawnTimer" type="Timer" parent="SpawnGrub_1" index="0"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 2.0
 one_shot = false
-autostart = true
+autostart = false
 
 [node name="Fly_spawn1" type="Position2D" parent="." index="8"]
 
@@ -166,7 +168,7 @@ __meta__ = {
 process_mode = 1
 wait_time = 5.0
 one_shot = false
-autostart = true
+autostart = false
 
 [node name="Fly_spawn2" type="Position2D" parent="." index="9"]
 
@@ -189,6 +191,7 @@ bus = "Master"
 
 [node name="CoinContainer" type="Container" parent="." index="13"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -219,7 +222,7 @@ position = Vector2( 273.208, 226.752 )
 process_mode = 1
 wait_time = 1.0
 one_shot = false
-autostart = true
+autostart = false
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
