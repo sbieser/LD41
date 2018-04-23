@@ -48,11 +48,12 @@ func _on_Player_button_pressed(button_type):
 				$HUD.update_score(food_count)
 				$Tama.food(1)
 		1:
-			if (coin_count > 0):
-				coin_count = coin_count - 1
-				$HUD.update_coin(coin_count)
-				$Tama.happy(1)
-			pass
+			_handle_restart_game()
+#			if (coin_count > 0):
+#				coin_count = coin_count - 1
+#				$HUD.update_coin(coin_count)
+#				$Tama.happy(1)
+			
 	
 func _on_SpawnTimer_timeout():
 	randomize()
@@ -65,16 +66,32 @@ func _on_SpawnTimer_timeout():
 		all_flys.push_back(fly_instance)
 
 func _handle_restart_game():
-	for g in all_grubs:
-		g.remove_enemy(false)
-		all_grubs.erase(g)
 	
-	for f in all_flys:
-		all_flys.erase(f)
-	
-	for c in coins:
-		coins.erase(c)
+	var _coins = get_tree().get_nodes_in_group("coin")
+	for _coin in _coins:
+   	 	_coin.queue_free()
 		
+	var _enemies = get_tree().get_nodes_in_group("enemy")
+	for _enemy in _enemies:
+   	 	_enemy.queue_free()
+	
+	all_grubs.clear()
+	all_flys.clear()
+	coins.clear()
+	
+#	for g in all_grubs:
+#		g.queue_free()
+#		all_grubs.erase(g)
+#		#g.remove_enemy(false)
+#
+#	for f in all_flys:
+#		all_flys.erase(f)
+#		f.queue_free()
+#
+#	for c in coins:
+#		c.queue_free()
+#		coins.erase(c)
+
 	$Coin_timer.start()
 	$SpawnGrub_1/SpawnTimer.start()
 	$Fly_spawn1/SpawnTimer.start()
