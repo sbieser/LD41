@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://textures/player_anims/player_idle1.png" type="Texture" id=2]
@@ -8,15 +8,16 @@
 [ext_resource path="res://textures/player_anims/player_idle5.png" type="Texture" id=6]
 [ext_resource path="res://textures/player_anims/player_idle6.png" type="Texture" id=7]
 [ext_resource path="res://textures/player_anims/player_jump.png" type="Texture" id=8]
-[ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=9]
-[ext_resource path="res://textures/player_anims/player_attack_new1.png" type="Texture" id=10]
-[ext_resource path="res://textures/player_anims/player_attack_new2.png" type="Texture" id=11]
-[ext_resource path="res://textures/player_anims/player_attack_new3.png" type="Texture" id=12]
-[ext_resource path="res://textures/player_anims/player_walk1.png" type="Texture" id=13]
-[ext_resource path="res://textures/player_anims/player_walk2.png" type="Texture" id=14]
-[ext_resource path="res://textures/player_anims/player_walk3.png" type="Texture" id=15]
-[ext_resource path="res://textures/player_anims/player_walk4.png" type="Texture" id=16]
+[ext_resource path="res://textures/player_anims/player_walk1.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/player_walk2.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/player_walk3.png" type="Texture" id=11]
+[ext_resource path="res://textures/player_anims/player_walk4.png" type="Texture" id=12]
+[ext_resource path="res://textures/player_anims/player_crouch.png" type="Texture" id=13]
+[ext_resource path="res://textures/player_anims/player_attack_new1.png" type="Texture" id=14]
+[ext_resource path="res://textures/player_anims/player_attack_new2.png" type="Texture" id=15]
+[ext_resource path="res://textures/player_anims/player_attack_new3.png" type="Texture" id=16]
 [ext_resource path="res://sounds/Hit_Hurt29.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/Jump.wav" type="AudioStream" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -41,20 +42,20 @@ animations = [ {
 "name": "jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "duck",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": false,
 "name": "new_attack",
 "speed": 30.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -62,7 +63,7 @@ animations = [ {
 custom_solver_bias = 0.0
 extents = Vector2( 10, 23.9946 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 2
@@ -139,6 +140,14 @@ shape = SubResource( 4 )
 
 stream = ExtResource( 17 )
 volume_db = -48.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="." index="6"]
+
+stream = ExtResource( 18 )
+volume_db = -44.0
 autoplay = false
 mix_target = 0
 bus = "Master"

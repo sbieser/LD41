@@ -120,7 +120,8 @@ func handle_horizontal_movement():
 	
 	var cur_speed = walk_speed
 	if down:
-		cur_speed = walk_speed / 2
+		pass
+		#cur_speed = walk_speed / 2
 	if right:
 		velocity.x += cur_speed
 	if left:
@@ -168,6 +169,7 @@ func handle_input():
 				change_state(WALK)
 			elif z and is_on_floor():
 				velocity.y = jump_speed
+				$JumpSound.play()
 				change_state(JUMP)
 			elif down:
 				change_state(CROUCH_IDLE)
@@ -203,6 +205,7 @@ func handle_input():
 					change_state(CROUCH_IDLE)
 			elif z and is_on_floor():
 				velocity.y = jump_speed
+				$JumpSound.play()
 				change_state(JUMP)
 			elif velocity.x == 0:
 				change_state(IDLE)
