@@ -40,8 +40,7 @@ SPEEDX = 1
 "enemy",
 ]]
 
-editor/display_folded = true
-position = Vector2( 0.391144, 0.993797 )
+position = Vector2( 0.00561528, 0.608261 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -56,8 +55,8 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_side" index="0"]
 
-position = Vector2( -31.1641, 6.57574 )
-scale = Vector2( 0.17794, 1.01821 )
+position = Vector2( -31.1641, 7.02552 )
+scale = Vector2( 0.17794, 0.983612 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -66,7 +65,7 @@ _sections_unfolded = [ "Transform" ]
 ]]
 
 editor/display_folded = true
-position = Vector2( 0.776672, 1.37933 )
+position = Vector2( 0.905182, 1.37933 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

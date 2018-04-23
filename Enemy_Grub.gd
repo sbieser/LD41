@@ -62,8 +62,10 @@ func move_directions():
 
 
 func _on_Left_side_body_entered(body):
-	direction = "right"
+	if body is TileMap:
+		direction = "right"
 
 
 func _on_Right_side_body_entered(body):
-	direction = "left"
+	if body is TileMap:
+		direction = "left"

@@ -91,6 +91,8 @@ func main_menu():
 	$GameOverLabel.visible = false
 	$FoodLabel.visible = false
 	$FoodCount.visible = false
+	$CoinCount.visible = false
+	$CoinLabel.visible = false
 	$HungerLabel.visible = false
 	$HappyLabel.visible = false
 	$BorderRect.visible = false
@@ -105,6 +107,8 @@ func start_game():
 	$GameOverLabel.visible = false
 	$FoodLabel.visible = true
 	$FoodCount.visible = true
+	$CoinCount.visible = true
+	$CoinLabel.visible = true
 	$HungerLabel.visible = true
 	$HappyLabel.visible = true
 	$BorderRect.visible = false
@@ -118,6 +122,8 @@ func handle_game_over():
 	$GameOverLabel.visible = true
 	$FoodLabel.visible = false
 	$FoodCount.visible = false
+	$CoinCount.visible = false
+	$CoinLabel.visible = false
 	$HungerLabel.visible = false
 	$HappyLabel.visible = false
 	$BorderRect.visible = true
