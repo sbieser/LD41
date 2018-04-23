@@ -5,7 +5,7 @@ onready var fly_scene = preload("res://Enemy_Fly.tscn")
 onready var coin_scene = preload("res://Coin.tscn")
 
 export (int) var food_count = 0				# The currency in which to feed the tama
-export (int) var coin_count = 0
+export (int) var coin_count = 0				# The currency in which to play the tama
 
 var all_grubs = []
 var all_flys = []
@@ -26,6 +26,7 @@ func _ready():
 	$HUD.connect( "main_menu", self, "_handle_main_menu" )
 	#$Minigame.connect( "end_minigame", self, "_handle_end_minigame")
 	#self.connect( "enemy_died", self, "_on_Player_hit" )
+	
 
 func _on_Timer_timeout():
 	#pass # replace with function body
@@ -47,7 +48,10 @@ func _on_Player_button_pressed(button_type):
 				$HUD.update_score(food_count)
 				$Tama.food(1)
 		1:
-			#print("this is the play button")
+			if (coin_count > 0):
+				coin_count = coin_count - 1
+				$HUD.update_coin(coin_count)
+				$Tama.happy(1)
 			pass
 	
 func _on_SpawnTimer_timeout():
@@ -108,15 +112,22 @@ func _handle_end_minigame():
 
 func _on_Tama_tama_update(happiness, hungriness):
 	$HUD.update_happy_hunger(happiness, hungriness)
+	if happiness < 0:
+		$TamaAnimatedSprite.play("baby_sad")
+	elif hungriness < 0:
+		$TamaAnimatedSprite.play("baby_hungry")
+	else:
+		$TamaAnimatedSprite.play("baby_idle")
 
 func _on_Tama_tama_died():
 	emit_signal("game_over")
 
 func remove_coin(coin):
 	coin_count = coin_count + 1
-	#$HUD.update_coin(coin_count)
+	$HUD.update_coin(coin_count)
 	if coin in coins:
 		coins.erase(coin)
+		coin.queue_free()
 	
 func _on_Coin_Timer_timeout():
 	randomize()
@@ -126,4 +137,8 @@ func _on_Coin_Timer_timeout():
 		var i = coin_spawn_list[randi()%coin_spawn_list.size()]
 		coin_instance.position = i.position
 		add_child(coin_instance)
+		print(coin_instance)
 		coins.push_back(coin_instance)
+
+func _on_Player_coin_collected(coin):
+	remove_coin(coin)
