@@ -58,7 +58,7 @@ func change_direction():
 		facing = RIGHT_FACING
 
 func change_state(new_state):
-	#print("change_state")
+	#print("change_state : " + str(new_state))
 	if new_state != state:
 		state = new_state
 		match state:
@@ -206,13 +206,21 @@ func handle_input():
 				change_state(JUMP)
 			elif velocity.x == 0:
 				change_state(IDLE)
+			elif x and state != ATTACK:
+				change_state(ATTACK)
 		JUMP:
 			if x and state != ATTACK:
 				change_state(ATTACK)
 		ATTACK:
 			pass
+#			if get_node("AttackArea/AttackTimer").stop():
+#				if is_on_floor():
+#					change_state(IDLE)
+#				else:
+#					change_state(JUMP)
 	
 func _process(delta):
+	#print_state()
 	if(!game_over):
 		handle_input()
 		
@@ -221,6 +229,12 @@ func _process(delta):
 			$AnimatedSprite.play(anim)
 			if anim == "new_attack":
 				get_node("AttackArea/AttackTimer").start()
+	
+	if state == ATTACK and $AttackArea/AttackTimer.is_stopped():
+		if is_on_floor():
+			change_state(IDLE)
+		else:
+			change_state(JUMP)
 		
 func _physics_process(delta):
 	velocity.y += gravity * delta
@@ -262,6 +276,7 @@ func _physics_process(delta):
 				emit_signal("button_pressed", area.get_parent().type)
 	
 func _on_AttackTimer_timeout():
+	#print("_on_AttackTimer_timeout")
 	get_node("AttackArea/AttackTimer").stop()
 	if is_on_floor():
 		change_state(IDLE)
