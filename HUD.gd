@@ -28,6 +28,9 @@ func _process(delta):
 func update_score(score):
 	$FoodCount.text = str(score)
 
+func update_coin(coin):
+	$CoinCount.text = str(coin)
+
 func update_happy_hunger(happiness,hungriness):
 	print("update_happy_hunger " + str(happiness) + ":" + str(hungriness))
 	#update the happy meter

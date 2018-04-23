@@ -44,7 +44,7 @@ func _on_ReduceTimer_timeout():
 	if tama_hungriness < death_threshold:
 		tama_hungriness = death_threshold
 		
-	if tama_happiness == death_threshold and tama_hungriness == death_threshold:
+	if tama_happiness == death_threshold or tama_hungriness == death_threshold:
 		$ReduceTimer.stop()
 		emit_signal("tama_died")
 	else:

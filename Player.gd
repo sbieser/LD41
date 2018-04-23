@@ -22,6 +22,7 @@ var new_anim
 var hit_bodies = [] #array of bodies hit by the current attack
 var hit_enemies = [] #array of enemies hit by the current attack
 var hit_buttons = [] #array of buttons hit by the current attack
+var hit_coins = [] #array of coins hit by the current attack
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -214,6 +215,7 @@ func _physics_process(delta):
 	var collected_areas = $CollectionArea.get_overlapping_areas()
 	for collected_area in collected_areas:
 		if collected_area.is_in_group("coin"):
+			hit_coins.append(collected_area)
 			emit_signal("coin_collected", collected_area)
 	
 	#check attacking
@@ -235,83 +237,7 @@ func _physics_process(delta):
 			if area.is_in_group("button") and not hit_buttons.has(area):
 				hit_buttons.append(area)
 				emit_signal("button_pressed", area.get_parent().type)
-		
-				
-				
-	#check if stunned			
-	#var collision_count = get_slide_count()
-	#if collision_count > 0:
-	#	for i in range(collision_count):
-	#		var collision = get_slide_collision(i)
-#			if collision.collider.is_in_group("enemy"):
-#				change_state(STUNNED)
-#				print("we have been hit by: " + collision.collider.name)
-#				velocity.y = jump_speed
-#				velocity.x = -velocity.x
-#
-#	if state == STUNNED:
-#		if is_on_floor():
-#			change_state(STUNNED_IDLE)
-#			$StunIdleTimer.start()
-				
-				
-	#if attacking:
-	#	var bodies = $AttackArea.get_overlapping_bodies()
-	#	for body in bodies:
-	#		if body.is_in_group("enemies") and not hit_bodies.has(body):
-	#			hit_bodies.append(body)
-	#			body._takeDamage(5)
-	#
-	#velocity.y += gravity * delta
-	#if state == JUMP:
-	#	if is_on_floor():
-	#		change_state(IDLE)
-	#
-	#trigger the stun timer when the player has hit the floor
-	#if state == STUNNED:
-	#	if is_on_floor():
-	#		change_state(STUNNED_IDLE)
-	#		#$StunIdleTimer.start()
-	#	
-	#var collision_count = get_slide_count()
-	#if collision_count > 0:
-	#	for i in range(collision_count):
-	#		var collision = get_slide_collision(i)
-	#		if collision.collider.is_in_group("enemies"):
-	#			change_state(STUNNED)
-	#			#print("we have been hit by: " + collision.collider.name)
-	#			velocity.y = jump_speed
-	#			velocity.x = -velocity.x
-	#			
-
-#func _on_StunTimer_timeout():
-#	#pass # replace with function body
-#	$StunIdleTimer.stop()
-#	change_state(IDLE)
-
-#func _on_AnimatedSprite_animation_finished():
-	#pass
-#	if anim == "new_attack":
-#		print("_on_AnimatedSprite_animation_finished")
-#		#$AnimatedSprite.frame = 0
-#		if is_on_floor():
-#			change_state(IDLE)
-#		else:
-#			change_state(JUMP)
-	#print("_on_AnimatedSprite_animation_finished")
-	#pass
-	#when finished with the attack animation
-#	if anim == "new_attack":
-#		if is_on_floor():
-#			change_state(IDLE)
-#		else:
-#			change_state(JUMP)
-#		print("attack animation finished")
-#		print($AnimatedSprite.frame)
-#		hit_bodies.clear()
-#		hit_enemies.clear()
-#		hit_buttons.clear()
-		
+	
 func _on_AttackTimer_timeout():
 	get_node("AttackArea/AttackTimer").stop()
 	if is_on_floor():
@@ -321,3 +247,4 @@ func _on_AttackTimer_timeout():
 	hit_bodies.clear()
 	hit_enemies.clear()
 	hit_buttons.clear()
+	hit_coins.clear()
