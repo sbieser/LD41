@@ -34,7 +34,7 @@ func _ready():
 	
 func _process(delta):
 	if is_game_playing:
-		$HUD.update_timer(int($PlayTimer.time_left))
+		$HUD.update_timer(int($PlayTimer.time_left - 1))
 	
 func _on_Timer_timeout():
 	#pass # replace with function body

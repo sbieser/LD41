@@ -9,6 +9,7 @@ signal enemy_died(enemy)
 export (int) var SPEED = 3
 var hitpoint = 1
 var direction = "left"
+const points = 15
 
 
 # class member variables go here, for example:

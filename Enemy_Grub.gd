@@ -11,6 +11,7 @@ var gravity = 500
 var hitpoint = 1
 var direction = "left"
 var velocity = Vector2()
+const points = 5
 
 
 # class member variables go here, for example:

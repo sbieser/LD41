@@ -4,7 +4,7 @@ extends Area2D
 # var a = 2
 # var b = "textvar"
 
-var points = 10
+const points = 10
 
 func _ready():
 	# Called every time the node is added to the scene.
