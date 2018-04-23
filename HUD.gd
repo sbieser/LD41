@@ -102,6 +102,7 @@ func main_menu():
 	
 func start_game():
 	update_score(0)
+	update_coin(0)
 	update_happy_hunger(0, 0)
 	$QuitLabel.visible = false
 	$RetryLabel.visible = false

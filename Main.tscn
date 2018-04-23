@@ -1,14 +1,14 @@
 [gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=2]
-[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=3]
-[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=4]
-[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=5]
-[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=6]
-[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=7]
-[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=8]
-[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
+[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=9]
 [ext_resource path="res://textures/player_anims/baby_idle1.png" type="Texture" id=10]
 [ext_resource path="res://textures/player_anims/baby_idle2.png" type="Texture" id=11]
 [ext_resource path="res://textures/player_anims/baby_idle3.png" type="Texture" id=12]
@@ -34,12 +34,12 @@
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "baby_sad",
+"name": "egg",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "egg",
+"name": "baby_sad",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
@@ -328,6 +328,13 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
+[node name="PlayTimer" type="Timer" parent="." index="20"]
+
+process_mode = 1
+wait_time = 120.0
+one_shot = true
+autostart = false
+
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 
 [connection signal="coin_collected" from="Player" to="." method="_on_Player_coin_collected"]
@@ -343,5 +350,7 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 [connection signal="tama_update" from="Tama" to="." method="_on_Tama_tama_update"]
 
 [connection signal="timeout" from="Coin_timer" to="." method="_on_Coin_Timer_timeout"]
+
+[connection signal="timeout" from="PlayTimer" to="." method="_on_PlayTimer_timeout"]
 
 

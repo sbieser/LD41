@@ -77,6 +77,9 @@ func _on_SpawnTimer_timeout():
 
 func _handle_restart_game():
 	
+	
+	$PlayTimer.start()
+	
 	var _coins = get_tree().get_nodes_in_group("coin")
 	for _coin in _coins:
    	 	_coin.queue_free()
@@ -97,7 +100,6 @@ func _handle_restart_game():
 	$Tama.emit_signal("restart")
 	$FoodBtn.emit_signal("restart")
 	$PlayBtn.emit_signal("restart")
-	pass
 	
 func _handle_main_menu():
 	get_tree().quit()
@@ -171,3 +173,8 @@ func _on_Coin_Timer_timeout():
 
 func _on_Player_coin_collected(coin):
 	remove_coin(coin)
+
+
+func _on_PlayTimer_timeout():
+	#pass # replace with function body
+	emit_signal("game_over")
