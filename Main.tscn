@@ -1,23 +1,23 @@
 [gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
-[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=3]
-[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=4]
-[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=5]
-[ext_resource path="res://textures/player_anims/baby_hungry1.png" type="Texture" id=6]
-[ext_resource path="res://textures/player_anims/baby_hungry2.png" type="Texture" id=7]
-[ext_resource path="res://textures/player_anims/baby_hungry3.png" type="Texture" id=8]
-[ext_resource path="res://textures/player_anims/baby_hungry4.png" type="Texture" id=9]
-[ext_resource path="res://textures/player_anims/baby_hungry5.png" type="Texture" id=10]
-[ext_resource path="res://textures/player_anims/baby_idle1.png" type="Texture" id=11]
-[ext_resource path="res://textures/player_anims/baby_idle2.png" type="Texture" id=12]
-[ext_resource path="res://textures/player_anims/baby_idle3.png" type="Texture" id=13]
-[ext_resource path="res://textures/player_anims/baby_idle4.png" type="Texture" id=14]
-[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=15]
-[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=16]
-[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=17]
-[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=18]
+[ext_resource path="res://textures/player_anims/baby_sad1.png" type="Texture" id=2]
+[ext_resource path="res://textures/player_anims/baby_sad2.png" type="Texture" id=3]
+[ext_resource path="res://textures/player_anims/baby_sad3.png" type="Texture" id=4]
+[ext_resource path="res://textures/player_anims/baby_sad4.png" type="Texture" id=5]
+[ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_anims/egg2.png" type="Texture" id=7]
+[ext_resource path="res://textures/player_anims/egg3.png" type="Texture" id=8]
+[ext_resource path="res://textures/player_anims/egg4.png" type="Texture" id=9]
+[ext_resource path="res://textures/player_anims/baby_idle1.png" type="Texture" id=10]
+[ext_resource path="res://textures/player_anims/baby_idle2.png" type="Texture" id=11]
+[ext_resource path="res://textures/player_anims/baby_idle3.png" type="Texture" id=12]
+[ext_resource path="res://textures/player_anims/baby_idle4.png" type="Texture" id=13]
+[ext_resource path="res://textures/player_anims/baby_hungry1.png" type="Texture" id=14]
+[ext_resource path="res://textures/player_anims/baby_hungry2.png" type="Texture" id=15]
+[ext_resource path="res://textures/player_anims/baby_hungry3.png" type="Texture" id=16]
+[ext_resource path="res://textures/player_anims/baby_hungry4.png" type="Texture" id=17]
+[ext_resource path="res://textures/player_anims/baby_hungry5.png" type="Texture" id=18]
 [ext_resource path="res://textures/player_anims/creature_bg.png" type="Texture" id=19]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=20]
 [ext_resource path="res://MainLevel.tscn" type="PackedScene" id=21]
@@ -34,22 +34,22 @@
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
+"name": "baby_sad",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
 "name": "egg",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "baby_hungry",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "baby_idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
-"name": "baby_sad",
+"name": "baby_hungry",
 "speed": 5.0
 } ]
 

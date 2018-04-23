@@ -110,7 +110,7 @@ func _handle_game_over():
 	$SpawnGrub_1/SpawnTimer.stop()
 	$Fly_spawn1/SpawnTimer.stop()
 	
-	$HUD.emit_signal("game_over")
+	$HUD.emit_signal("game_over", total)
 	$FoodBtn.emit_signal("game_over")
 	$PlayBtn.emit_signal("game_over")
 	$Player.emit_signal("game_over")

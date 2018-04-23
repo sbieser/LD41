@@ -88,7 +88,8 @@ func update_happy_hunger(happiness,hungriness):
 func main_menu():
 	$QuitLabel.visible = false
 	$RetryLabel.visible = false
-	$GameOverLabel.visible = false
+	$TotalPointsLabel.visible = false
+	$TotalPointCount.visible = false
 	$FoodLabel.visible = false
 	$FoodCount.visible = false
 	$CoinCount.visible = false
@@ -104,7 +105,8 @@ func start_game():
 	update_happy_hunger(0, 0)
 	$QuitLabel.visible = false
 	$RetryLabel.visible = false
-	$GameOverLabel.visible = false
+	$TotalPointsLabel.visible = false
+	$TotalPointCount.visible = false
 	$FoodLabel.visible = true
 	$FoodCount.visible = true
 	$CoinCount.visible = true
@@ -116,10 +118,12 @@ func start_game():
 	$StartLabel.visible = false
 	game = false
 	
-func handle_game_over():
+func handle_game_over(total):
+	$TotalPointCount.text = str(total*100)
 	$QuitLabel.visible = true
 	$RetryLabel.visible = true
-	$GameOverLabel.visible = true
+	$TotalPointsLabel.visible = true
+	$TotalPointCount.visible = true
 	$FoodLabel.visible = false
 	$FoodCount.visible = false
 	$CoinCount.visible = false
