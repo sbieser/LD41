@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://textures/player_anims/egg1.png" type="Texture" id=2]
@@ -24,8 +24,10 @@
 [ext_resource path="res://Player.tscn" type="PackedScene" id=22]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=23]
 [ext_resource path="res://sounds/Hit_Hurt18.wav" type="AudioStream" id=24]
-[ext_resource path="res://Tama.tscn" type="PackedScene" id=25]
-[ext_resource path="res://music/bensound-moose.ogg" type="AudioStream" id=26]
+[ext_resource path="res://sounds/Pickup_Coin26.wav" type="AudioStream" id=25]
+[ext_resource path="res://Tama.tscn" type="PackedScene" id=26]
+[ext_resource path="res://music/bensound-moose.ogg" type="AudioStream" id=27]
+[ext_resource path="res://fonts/ChevyRay - Softsquare.ttf" type="DynamicFontData" id=28]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -50,6 +52,14 @@ animations = [ {
 "name": "baby_sad",
 "speed": 5.0
 } ]
+
+[sub_resource type="DynamicFont" id=2]
+
+size = 14
+use_mipmaps = true
+use_filter = false
+font_data = ExtResource( 28 )
+_sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Main" type="Node" index="0"]
 
@@ -189,9 +199,17 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="Tama" parent="." index="12" instance=ExtResource( 25 )]
+[node name="CoinSound" type="AudioStreamPlayer" parent="." index="12"]
 
-[node name="CoinContainer" type="Container" parent="." index="13"]
+stream = ExtResource( 25 )
+volume_db = 0.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Tama" parent="." index="13" instance=ExtResource( 26 )]
+
+[node name="CoinContainer" type="Container" parent="." index="14"]
 
 editor/display_folded = true
 anchor_left = 0.0
@@ -223,22 +241,92 @@ position = Vector2( 273.208, 226.752 )
 
 position = Vector2( 550.842, -386.346 )
 
-[node name="Coin_timer" type="Timer" parent="." index="14"]
+[node name="Coin_timer" type="Timer" parent="." index="15"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="." index="15"]
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." index="16"]
 
-stream = ExtResource( 26 )
-volume_db = -8.39
+stream = ExtResource( 27 )
+volume_db = 0.0
 autoplay = false
-max_distance = 2000.0
-attenuation = 1.0
+mix_target = 0
 bus = "Master"
-area_mask = 1
+
+[node name="Label" type="Label" parent="." index="17"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 239.0
+margin_top = 123.0
+margin_right = 421.0
+margin_bottom = 140.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.184314, 0.384314, 0.184314, 1 )
+text = "<- Slash To Activate ->"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Label2" type="Label" parent="." index="18"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 209.0
+margin_top = 144.0
+margin_right = 245.0
+margin_bottom = 161.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.184314, 0.384314, 0.184314, 1 )
+text = "Feed"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Label3" type="Label" parent="." index="19"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 403.0
+margin_top = 144.0
+margin_right = 439.0
+margin_bottom = 161.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.184314, 0.384314, 0.184314, 1 )
+text = "Play"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [connection signal="button_pressed" from="Player" to="." method="_on_Player_button_pressed"]
 

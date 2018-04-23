@@ -152,6 +152,7 @@ func _on_Tama_tama_died():
 func remove_coin(coin):
 	total = total + coin_value
 	coin_count = coin_count + coin_value
+	$CoinSound.play()
 	$HUD.update_coin(coin_count)
 	if coin in coins:
 		coins.erase(coin)
