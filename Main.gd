@@ -146,11 +146,11 @@ func _on_Coin_Timer_timeout():
 	randomize()
 	if coins.size() < 5 && randi()%2 == 1:
 		var coin_instance = coin_scene.instance()
-		print(randi()%coin_spawn_list.size())
+		#print(randi()%coin_spawn_list.size())
 		var i = coin_spawn_list[randi()%coin_spawn_list.size()]
 		coin_instance.position = i.position
 		add_child(coin_instance)
-		print(coin_instance)
+		#print(coin_instance)
 		coins.push_back(coin_instance)
 
 func _on_Player_coin_collected(coin):
