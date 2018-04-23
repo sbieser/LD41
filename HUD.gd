@@ -112,6 +112,7 @@ func start_game():
 	$HappyLabel.visible = true
 	$BorderRect.visible = false
 	$StartColorRect.visible = false
+	$GameNameLabel.visible = false
 	$TimerBorder.visible = true
 	game = false
 	
