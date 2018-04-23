@@ -48,11 +48,11 @@ func _on_Player_button_pressed(button_type):
 				$HUD.update_score(food_count)
 				$Tama.food(1)
 		1:
-			_handle_restart_game()
-#			if (coin_count > 0):
-#				coin_count = coin_count - 1
-#				$HUD.update_coin(coin_count)
-#				$Tama.happy(1)
+			#_handle_restart_game()
+			if (coin_count > 0):
+				coin_count = coin_count - 1
+				$HUD.update_coin(coin_count)
+				$Tama.happy(1)
 			
 	
 func _on_SpawnTimer_timeout():
